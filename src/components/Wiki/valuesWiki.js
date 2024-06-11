@@ -2,7 +2,7 @@
 export const plantsData = [
     {
       id: 1,
-      name: "musgo normal",
+      name: "musgo estrella",
       imageSource: require("../../../img/plantasWiki/musgo-estrella.jpg"),
       description: "El musgo de estrellas (Tortella squarrosa = Pleurochaete squarrosa) es una especie de musgo muy frecuente en el suelo, especialmente en las umbrías de los pinares de pino carrasco, en los que consigue pequeños recubrimientos monoespecíficos.",
       selected: false,
