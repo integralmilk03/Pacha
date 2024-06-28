@@ -3,9 +3,10 @@ import { Text, View, Pressable, Modal, TouchableOpacity, Alert, Image } from "re
 import Icon from 'react-native-vector-icons/FontAwesome';
 import PlantCard from "./PlantasTemplate";
 import styles from "../Styles/styles.js";
-import { setBackground } from "../Measurements/Sensors.js";
+import { setBackground } from "../Measurements/Main.js";
 import {db, ref, set, child} from '../../firebase.js';
 import { plantsData, plantIds } from "./valuesWiki.js";
+import { COLORS } from "../Styles/color.js";
 
 //Variables
 let lastPlant = '';
@@ -115,11 +116,11 @@ const Plantas = ({
             style={({ pressed }) => [
               styles.plantas.button,
               styles.plantas.shadow,
-              pressed ? { backgroundColor: '#13957b' } : { backgroundColor: backgroundColor }
+              pressed ? { backgroundColor: COLORS.weakGreen} : { backgroundColor: backgroundColor }
             ]}
           >
             <Image source={imgSource} style={styles.plantas.buttonImage} />
-            <Text style={[styles.plantas.buttonText, { color: 'black' }]}>{label}</Text>
+            <Text style={[styles.plantas.buttonText]}>{label}</Text>
           </Pressable>
     
           <Modal

@@ -1,26 +1,19 @@
-import { Animated, Modal, ImageBackground, View, Image, Text, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
+import { Animated, Modal, ImageBackground, View, Image, Text, TouchableOpacity, Dimensions, ScrollView, SafeAreaView } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import { db, ref, onValue } from "../../firebase.js";
 import styles from '../Styles/styles.js';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { expresiones } from '../Expresiones/valuesCaras.js';
-import { showMessage } from "react-native-flash-message";
+import { COLORS } from '../Styles/color.js';
 
 export let background;
 const backgroundDefault = require('../../../assets/Pacha-fondo7.jpeg');
-
-export const setBackground = (newBackground) => {
-    background = newBackground;
-};
-
 const screenHeight = Dimensions.get("window").height;
 const screenwidth = Dimensions.get("window").width;
-
-const pachaHeigth = screenHeight * 0.25;
-const pachaWidth = screenwidth * 0.55;
-
+const fillTemperature = 10;
+const fillHumedity = 50;
 
 // Constantes para el firebase
-
 const expresionesFirebase = {
     '1': 'Feliz',
     '2': 'Triste',
@@ -28,48 +21,9 @@ const expresionesFirebase = {
     '4': 'Calor',
 };
 
-const feliz = () => {showMessage({
-    message: "Holi UwU",
-    description: "Tus cuidados son excelentes gracias",
-    type: "success",
-    animationDuration: 325,})};
-
-const triste = () => {showMessage({
-    message: "Triste",
-    description: "No estoy recibiendo los mejores cuidados",
-    type: "danger",
-    animationDuration: 325,})};
-
-const sediento = () => {showMessage({
-        message: "Dame agua",
-        description: "Por favor dame un poco de agua que me muero de sed",
-        type: "danger",
-        animationDuration: 325,})};
-
-const muchoCalor = () => {showMessage({
-            message: "Llevame a la sombra",
-            description: "Por favor el sol esta demasiado fuerte",
-            type: "warning",
-            animationDuration: 325,})};
-  
-const muchaAgua = () => {showMessage({
-    message: "Demasiada Agua",
-    description: "Me estoy ahogando",
-    type: "warning",
-    animationDuration: 325,})};
-
-  const frio = () => {showMessage({
-    message: "Tengo frio",
-    description: "Prende la calefacción para que pueda calentarme",
-    type: "warning",
-    animationDuration: 325,})};
-  
-  const muyOscuro = () => {showMessage({
-    message: "Hola hay alguien ahi?",
-    description: "No puedo ver nada",
-    type: "warning",
-    animationDuration: 325,})};
-    
+export const setBackground = (newBackground) => {
+    background = newBackground;
+};
 
 const Progress = ({ step, steps, medida, height, color, backcolor, backcolortext, colorborder}) => {
     const [width, setWidth] = React.useState(0);
@@ -124,15 +78,13 @@ const Progress = ({ step, steps, medida, height, color, backcolor, backcolortext
         </>
     );
 };
+
 const Sensor = () => {
 const [modalVisible, setModalVisible] = useState(false);
   const [temp, setTemp] = useState(80);   
   const [humidity, setHumext] = useState(20);
   const [capacitive, setHumint] = useState(10);
   const [light, setLuz] = useState(50);   
-  //Humedad y temp exterio
-  //humedad interior
-  //Luz
   const [firebaseExpresion, setFirebaseExpresion] = useState(1);
 
   useEffect(() => {
@@ -160,7 +112,7 @@ const [modalVisible, setModalVisible] = useState(false);
           return null;
       }};
 
-  const labelToFind = expresionesFirebase[firebaseExpresion];
+  const labelToFind = expresionesFirebase[1]; //firebaseExpression
   const expresion = expresiones.find(expresion => expresion.label === labelToFind);
   const expresionImageSource = expresion ? expresion.imageSource : null;
   
@@ -212,32 +164,61 @@ const [modalVisible, setModalVisible] = useState(false);
     ];
 
     return(
-        <ImageBackground source={background ? background : backgroundDefault} 
-        style={styles.sensors.image}>
-        <View style={{backgroundColor: background ? "rgba(164, 230, 142, 0.20)":"rgba(164, 230, 142, 0.40)", paddingBottom: 100, paddingTop: 25,}}>
-            
+        <SafeAreaView style={{flex: 1}}>
+        <ScrollView>
+
             {notification(firebaseExpresion)}
 
-            <View style={{ height: screenHeight * 0.37, alignItems: 'center', justifyContent: 'center'}}>
-                <View style={{ borderWidth: 5, borderRadius: 15, paddingHorizontal: 10, paddingTop: 10, backgroundColor: 'white'}}>
-                    <Image source={expresionImageSource} style={{resizeMode: 'contain', height: 200, width: 215}}/>
-                    <Text style={{fontSize: 22, textAlign: 'center', marginBottom: 15}}>Pacha</Text>    
-                </View>
+            <View style={{width: screenwidth, height: screenHeight * 0.50, alignItems: 'center', justifyContent: 'space-around',}}>
+                <Image source={require('../../../assets/pacha_cactus.png')} style={{resizeMode: 'contain',width: screenwidth * 0.55, height: screenHeight * 0.45}}/>
+                <Image source={expresionImageSource} style={{position: 'absolute', top: 175, width: 90, height: 90, resizeMode: 'contain'}}/> 
             </View>
             
-            <Progress step={calculateStep(capacitive, capacitiveConditions)} steps={10} medida={"Húmedad de tu Planta"} height={20} color={'rgba(135, 206, 235, 1)'} backcolor={'rgba(135, 206, 235, 0.1)'} backcolortext={'rgba(135, 206, 235, 0.25)'} colorborder={'rgba(0,0,0,1)'} /> 
-            <Progress step={calculateStep(temp, tempConditions)} steps={10} medida={"Temperatura de tu Casa"} height={20} color={'rgba(255, 69, 0, 1)'} backcolor={'rgba(255, 69, 0, 0.1)'} backcolortext={'rgba(255, 69, 0, 0.25)'} colorborder={'rgba(0,0,0,1)'}/> 
-            <Progress step={calculateStep(humidity, humidityConditions)} steps={10} medida={"Húmedad de tu Casa"} height={20} color={'rgba(0, 128, 128, 1)'} backcolor={'rgba(0, 128, 128, 0.1)'} backcolortext={'rgba(0, 128, 128, 0.25)'} colorborder={'rgba(0,0,0,1)'}/> 
-            <Progress step={calculateStep(light, lightConditions)} steps={10} medida={"Iluminación de tu Planta"} height={20} color={'rgba(255, 255, 0, 1) '} backcolor={'rgba(255, 255, 0, 0.1) '} backcolortext={'rgba(255, 255, 0, 0.25) '} colorborder={'rgba(0,0,0,1)'}/> 
-        
+            <ImageBackground source={background ? background : backgroundDefault} style={{width: screenwidth, height: screenHeight * 0.60, resizeMode: 'strech', marginBottom: 80,}}>
+            
+            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingTop: 5,}}>
+            <AnimatedCircularProgress
+            size={screenHeight * 0.23}
+            width={15}
+            fill={fillTemperature}
+            tintColor={COLORS.tomato}
+            backgroundColor="rgba(69, 69, 69, 0.01)">
+            {
+                () => (
+                <Text style={{fontSize: 30, fontFamily: 'perolet', color: COLORS.white}}>
+                    {`${fillTemperature} °C`}
+                </Text>
+                )
+            }
+            </AnimatedCircularProgress>
+            <Text style={{fontSize: 23, fontFamily: 'perolet', color: COLORS.white, paddingHorizontal: 10, }}>Temperatura</Text>
+            </View>
+
+            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingTop: 5, }}>
+            <AnimatedCircularProgress
+            size={screenHeight * 0.23}
+            width={15}
+            fill={fillHumedity}
+            tintColor={COLORS.water}
+            backgroundColor="rgba(69, 69, 69, 0.01)">
+            {
+                () => (
+                <Text style={{fontSize: 30, fontFamily: 'perolet', color: COLORS.white}}>
+                    {`${fillHumedity} %`}
+                </Text>
+                )
+            }
+            </AnimatedCircularProgress>
+            <Text style={{fontSize: 23, fontFamily: 'perolet', color: COLORS.white, paddingHorizontal: 10, }}>Humedad</Text>
+            </View>
+
             <TouchableOpacity
             style={styles.sensors.pressLecturaButton}
-            title="Conoce los Datos de tu Planta :)"
+            title="Saber Mas"
             onPress={() => setModalVisible(true)}
             >
-                <Text style={styles.sensors.pressLecturaButtonText}>Conoce los Datos de tu Planta :D</Text>
+                <Text style={styles.sensors.pressLecturaButtonText}>Saber Mas</Text>
             </TouchableOpacity>
-
             <Modal
             animationType="slide"
             transparent={true}
@@ -249,7 +230,7 @@ const [modalVisible, setModalVisible] = useState(false);
                 <View style={styles.sensors.containerModal}>
                     <View style={styles.sensors.centeredViewSensors}>
                         <View style={styles.modalView}>
-                        <Text style={styles.sensors.LecturaTextTitle}>Estos Son Los Datos Técnicos De Tu Planta :D</Text>
+                        <Text style={styles.sensors.LecturaTextTitle}>Datos Técnicos De Tu Planta</Text>
                             <View style={styles.sensors.data}>
                                 <View style={styles.sensors.dataSensor}>
                                     <View style={styles.sensors.tempmaceta}>
@@ -276,9 +257,11 @@ const [modalVisible, setModalVisible] = useState(false);
                     </View>
                 </View>
             </Modal>
-        </View>
-        </ImageBackground>
+
+            </ImageBackground>
         
+        </ScrollView>
+        </SafeAreaView>
         );
 }
 

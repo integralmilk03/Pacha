@@ -33,21 +33,10 @@ const Caras = () => {
         );
     };
 
-    const carasHeader = () => {
-        return (
-            <View style={styles.caras.viewHeaderText}>
-                <Text style={styles.caras.headertText}>
-                    Expresiones de tu maceta
-                </Text>
-            </View>
-        );
-    };
-
     return (
-    <ImageBackground source={background} style={styles.caras.image}>
-    <View style={{paddingTop: 30, paddingBottom: 80,}}>    
+    // <ImageBackground source={background} style={styles.caras.image}>
+    <View style={styles.caras.container}>    
         <ScrollView>
-            {carasHeader()}
             <View style={styles.caras.expressionContainer}>
                 {expresiones.map((expresion, index) => carasImage(expresion))}
             </View>
@@ -58,25 +47,20 @@ const Caras = () => {
         visible={modalVisible}
         onRequestClose={closeModal}
         >
-        <View style={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+        <View style={ styles.caras.modalContaier }>
             {selectedExpresion && (
-            <View style={{ backgroundColor: '#1d3244', borderRadius: 10, width: '100%', height: '100%' }}>
+            <View style={styles.caras.modalSubContainer}>
             <Image
-                style={{
-                resizeMode: 'contain',
-                width: '90%',
-                height: height * 0.45,
-                alignSelf: 'center'
-                }}
+                style={styles.caras.modalImage}
                 source={selectedExpresion.gifSource}
             />
-            <ScrollView style={{ flex: 1, marginTop: 10 }}>
-                <Text style={{ color: '#ffffff', textAlign: 'center', fontSize: 25, paddingHorizontal: 20 }}>
+            <ScrollView style={styles.caras.modalScroll}>
+                <Text style={styles.caras.modalText}>
                 {selectedExpresion.description}
                 </Text>
             </ScrollView>
-            <Pressable onPress={closeModal} style={{ marginTop: 10 }}>
-                <Text style={{ color: '#e8ff65', textAlign: 'center', fontSize: 22, paddingVertical: 10 }}>
+            <Pressable onPress={closeModal} style={styles.caras.pressable}>
+                <Text style={styles.caras.pressableButton}>
                 Cerrar
                 </Text>
             </Pressable>
@@ -84,7 +68,7 @@ const Caras = () => {
         </View>
         </Modal>
     </View>
-    </ImageBackground>
+    // </ImageBackground>
     );
 };
 

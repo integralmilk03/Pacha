@@ -18,7 +18,7 @@ export const plantsData = [
         {
             id: "03",
             image: {uri: "https://cdn.pixabay.com/photo/2020/04/10/15/26/moss-5026256_1280.jpg"},
-        },]
+        },],
     },
     {
       id: 2,
@@ -62,26 +62,6 @@ export const plantsData = [
     },
     {
       id: 4,
-      name: "cuerno de alce",
-      imageSource: require("../../../img/plantasWiki/cuerno-de-alce.jpg"),
-      description: "Platycerium bifurcatum conocida con cuerno de alce natural de Australia. Una plantita que consiste en una hoja de 12 a 30 cm de ancho solapandose una contra otra",
-      selected: false,
-      carouselData: [
-        {
-            id: "01",
-            image: {uri: "https://www.hola.com/imagenes/decoracion/20220926217832/cultivo-cuerno-alce-plantas-interior-mc/1-143-75/cultivo-cuerno-alce-m.jpg?im=Resize=(680)"},
-        },
-        {
-            id: "02",
-            image: {uri: "https://cdn0.ecologiaverde.com/es/posts/2/6/8/cuidados_del_helecho_cuerno_de_alce_862_orig.jpg"},
-        },
-        {
-            id: "03",
-            image: {uri: "https://www.infojardin.com/jardineria/helechos/cqs1343929807b.JPG"},
-        },]
-    },
-    {
-      id: 5,
       name: "cactus conejo",
       imageSource: require("../../../img/plantasWiki/cactus-conejo.jpg"),
       description: "Opuntia microdasys es una especie perteneciente a la familia Cactaceae, nativa de México. En México es conocida como nopal cegador, en referencia a que las glóquidas que se les clavan en los ojos a los animales que pastan pueden causarles ceguera",
@@ -101,7 +81,7 @@ export const plantsData = [
         },]
     },
     {
-      id: 6,
+      id: 5,
       name: "aloe vera",
       imageSource: require("../../../img/plantasWiki/aloe-vera.jpg"),
       description: "Aloe vera, también llamada sábila, es una especie suculenta de la familia Asphodelaceae. Con unas quinientas (500) especies, el aloe está ampliamente distribuido y se considera una especie invasora en muchas regiones del mundo.",
@@ -121,7 +101,7 @@ export const plantsData = [
         },]
     },
     {
-      id: 7,
+      id: 6,
       name: "ceropegia",
       imageSource: require("../../../img/plantasWiki/ceropegia.jpg"),
       description: "Ceropegia woodii es la designación científica de la planta de tallo nervudo. Las plantas de interior de enredadera de rosario tienen pares de hojas en forma de corazón aproximadamente cada 7,5 cm (3 pulgadas) a lo largo del tallo delgado. El escaso follaje contribuye al aspecto único de la planta. Las hojas están ligeramente grabadas en la superficie superior con blanco y en la parte inferior con color púrpura. Los tallos caen sobre una maceta o recipiente y cuelgan hasta 3 pies (1 m). En los tallos se forman pequeñas estructuras en forma de cuentas a intervalos entre las hojas. El cuidado de la planta de rosario es mínimo y el hilo de corazones tiene una alta tolerancia al calor y requerimientos de luz. Elija la habitación más soleada de la casa para cultivar la vid rosario Ceropegia.",
@@ -146,8 +126,7 @@ export const plantsData = [
     "musgo estrella": 1,
     "primulas": 2,
     "paleta pintor": 3,
-    "cuerno de alce": 4,
-    "cactus conejo": 5,
-    "aloe vera": 6,
-    "ceropegia": 7,
+    "cactus conejo": 4,
+    "aloe vera": 5,
+    "ceropegia": 6,
 };

@@ -1,6 +1,7 @@
 import { FlatList, Image, View, Dimensions } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { plantsData, plantIds } from "./valuesWiki";
+import styles from "../Styles/styles";
 
 // Logica para hacer que las imagesnes que aparecen en carouselData se muestren
 // una tras de otra
@@ -39,7 +40,7 @@ const Carousel = ({name}) => {
     const renderItem = ({item, index}) => {
         return(
             <View>
-                <Image source={item.image} style={{height: (screenHeigth*0.5), width: screeWidth, }}/>
+                <Image source={item.image} style={styles.plantCard.imageCarousel}/>
             </View>
         )
     }
