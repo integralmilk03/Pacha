@@ -2,8 +2,17 @@
 export const plantsData = [
     {
       id: 1,
-      name: "musgo estrella",
+      name: "Musgo Estrella",
+
+      color: "#85915C",
+      imageBackground: require("../../../img/pachas/pacha_musgo_estrella.png"),
       imageSource: require("../../../img/plantasWiki/musgo-estrella.jpg"),
+      imageSourceBackground: require('../../../img/plantasWiki/musgo-estrella-background.png'),
+
+      sunLight: "parcial",
+      water: "cada 10-14 días",
+      care: "facil",
+
       description: "El musgo de estrellas (Tortella squarrosa = Pleurochaete squarrosa) es una especie de musgo muy frecuente en el suelo, especialmente en las umbrías de los pinares de pino carrasco, en los que consigue pequeños recubrimientos monoespecíficos.",
       selected: false,
       carouselData: [
@@ -22,8 +31,18 @@ export const plantsData = [
     },
     {
       id: 2,
-      name: "primulas",
+      name: "Primulas",
+
+      color: "#A6B148",
+      imageBackground: require("../../../img/pachas/pacha_primulas.png"),
       imageSource: require("../../../img/plantasWiki/primula.jpg"),
+      imageSourceBackground: require('../../../img/plantasWiki/primulas-background.png'),
+
+
+      sunLight: "---",
+      water: "---",
+      care: "---",
+
       description: "Las prímulas (Primula spp.), también conocidas como primaveras o primaveras de jardín (por ser la primera en florecer), es un género de plantas de la familia de las primuláceas.",
       selected: false,
       carouselData: [
@@ -42,8 +61,17 @@ export const plantsData = [
     },
     {
       id: 3,
-      name: "paleta pintor",
+      name: "Paleta Pintor",
+
+      color: "#A25C72",
+      imageBackground: require("../../../img/pachas/pacha_paleta_pintor.png"),
+
+      sunLight: "---",
+      water: "---",
+      care: "---",
+
       imageSource: require("../../../img/plantasWiki/paleta-pintor.jpg"),
+      imageSourceBackground: require('../../../img/plantasWiki/paleta-pintor-background.png'),
       description: "Las Hypoestes son un tipo de arbusto de hoja perenne, de la familia de las Acantáceas. Planta conocida por sus bonitas hojas, que son de color verde intenso con manchas que puedes encontrar en diferentes colores y de hojas ovaladas",
       selected: false,
       carouselData: [
@@ -62,8 +90,17 @@ export const plantsData = [
     },
     {
       id: 4,
-      name: "cactus conejo",
+      name: "Cactus Conejo",
+
+      color: "#395431",
+      imageBackground: require("../../../img/pachas/pacha_cactus_conejo.png"),
+
+      sunLight: "---",
+      water: "---",
+      care: "---",
+
       imageSource: require("../../../img/plantasWiki/cactus-conejo.jpg"),
+      imageSourceBackground: require('../../../img/plantasWiki/cactus-conejo-background.png'),
       description: "Opuntia microdasys es una especie perteneciente a la familia Cactaceae, nativa de México. En México es conocida como nopal cegador, en referencia a que las glóquidas que se les clavan en los ojos a los animales que pastan pueden causarles ceguera",
       selected: false,
       carouselData: [
@@ -82,8 +119,17 @@ export const plantsData = [
     },
     {
       id: 5,
-      name: "aloe vera",
+      name: "Aloe Vera",
+
+      color: "#649957",
+      imageBackground: require("../../../img/pachas/pacha_aloe_vera.png"),
+
+      sunLight: "---",
+      water: "---",
+      care: "---",
+
       imageSource: require("../../../img/plantasWiki/aloe-vera.jpg"),
+      imageSourceBackground: require('../../../img/plantasWiki/aloe-vera-background.png'),
       description: "Aloe vera, también llamada sábila, es una especie suculenta de la familia Asphodelaceae. Con unas quinientas (500) especies, el aloe está ampliamente distribuido y se considera una especie invasora en muchas regiones del mundo.",
       selected: false,
       carouselData: [
@@ -102,31 +148,40 @@ export const plantsData = [
     },
     {
       id: 6,
-      name: "ceropegia",
-      imageSource: require("../../../img/plantasWiki/ceropegia.jpg"),
-      description: "Ceropegia woodii es la designación científica de la planta de tallo nervudo. Las plantas de interior de enredadera de rosario tienen pares de hojas en forma de corazón aproximadamente cada 7,5 cm (3 pulgadas) a lo largo del tallo delgado. El escaso follaje contribuye al aspecto único de la planta. Las hojas están ligeramente grabadas en la superficie superior con blanco y en la parte inferior con color púrpura. Los tallos caen sobre una maceta o recipiente y cuelgan hasta 3 pies (1 m). En los tallos se forman pequeñas estructuras en forma de cuentas a intervalos entre las hojas. El cuidado de la planta de rosario es mínimo y el hilo de corazones tiene una alta tolerancia al calor y requerimientos de luz. Elija la habitación más soleada de la casa para cultivar la vid rosario Ceropegia.",
+      name: "Karaconcha",
+
+      color: "#AB414B",
+      imageBackground: require("../../../img/pachas/pacha_karaconcha.png"),
+
+      sunLight: "---",
+      water: "---",
+      care: "---",
+
+      imageSource: require("../../../img/plantasWiki/karaconcha.jpg"),
+      imageSourceBackground: require('../../../img/plantasWiki/karaconcha-background.png'),
+      description: "La Kalanchoe blossfeldiana es una suculenta originaria de Madagascar, conocida por sus hojas carnosas y brillantes, y sus vistosas flores en racimos de colores como rojo, rosa, naranja, amarillo y blanco. Es una planta de bajo mantenimiento que prefiere luz brillante e indirecta, suelo bien drenado y riego moderado, siendo popular como planta de interior y en arreglos florales por su durabilidad y atractivo.",
       selected: false,
       carouselData: [
       {
         id:"01",
-        image: {uri: "https://plantcaretoday.com/wp-content/uploads/LHF-53697-varieties-ceropegia-t1-min.jpeg"}
+        image: {uri: "https://images.pexels.com/photos/18243063/pexels-photo-18243063/free-photo-of-flor-crecimiento-flores-rosadas-flores-rosas.jpeg"}
       },
       {
         id:"02",
-        image: {uri: "https://images.almostedenplants.com/images/full/Ceropegia%20linearis%20var%20woodii%20(4).jpg"}
+        image: {uri: "https://images.pexels.com/photos/798116/pexels-photo-798116.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
       },
       {
         id:"03",
-        image: {uri: "https://cdn.mos.cms.futurecdn.net/qxTkH5qZxJEB5UoVk6VhgZ.jpg"}
+        image: {uri: "https://images.pexels.com/photos/6073/coffee-cup-stack-break.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
       }],
     },
   ];
 
   export const plantIds = {
-    "musgo estrella": 1,
-    "primulas": 2,
-    "paleta pintor": 3,
-    "cactus conejo": 4,
-    "aloe vera": 5,
-    "ceropegia": 6,
+    "Musgo Estrella": 1,
+    "Primulas": 2,
+    "Paleta Pintor": 3,
+    "Cactus Conejo": 4,
+    "Aloe Vera": 5,
+    "Karaconcha": 6,
 };

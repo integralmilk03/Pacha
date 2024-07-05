@@ -12,11 +12,14 @@ SplashScreen.preventAutoHideAsync();
 
 export default function App() {
 
-  const scheme = useColorScheme();
-  const MyTheme = scheme === 'light' ? DefaultTheme : DarkTheme;
+  // Valores para el modo oscuro
+  // const scheme = useColorScheme();
+  // const MyTheme = scheme === 'light' ? DefaultTheme : DarkTheme;
 
   const [fontsLoaded, fontError] = useFonts({
     'perolet': require('./assets/Fonts/perolet.ttf'),
+    'open-sans': require('./assets/Fonts/openSans.ttf'),
+    'open-sans-Bold': require('./assets/Fonts/openSans-Bold.ttf'),
   });
 
   const onLayoutRootView = useCallback(async () => {
@@ -31,9 +34,10 @@ export default function App() {
 
   return (
     <View style={{flex: 1}} onLayout={onLayoutRootView}>
-      <NavigationContainer theme={MyTheme}>
+      {/* theme={MyTheme} */}
+      <NavigationContainer>
         <Tabs/>
-        <FlashMessage position="center" />
+        <FlashMessage position="bottom" />
       </NavigationContainer>
     </View>
   );

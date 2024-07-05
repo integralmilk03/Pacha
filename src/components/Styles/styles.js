@@ -1,24 +1,22 @@
-import { StyleSheet, Dimensions, useColorScheme } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { COLORS } from './color.js';
-import { useState } from 'react';
 
 
 //Variables
 export const width = Dimensions.get("window").width;
 export const height = Dimensions.get("window").height;
 //Dimensiones para MAIN
-const potHeight = height * 0.5; 
-const potWidth = width * 0.4;
-const faceTop = potHeight * 0.55;
-const faceHeight = potHeight * 0.25;
-const faceWidth = potWidth * 0.6;
+const potHeight = height * 0.6; 
+const potWidth = width ;
+const faceHeight = height > 850 ? potHeight * 0.3 : potHeight * 0.2;
+const faceWidth = width > 500 ? potWidth * 0.53 : potWidth * 0.55;
 //Dimensiones para WIKI
 const plantasButtonHeight = 275;
 const plantasButtonWidth = 295;
 const plantasImagenHeight = plantasButtonHeight - 50;
 const plantasImagenWidth = plantasButtonWidth - 50;
-//Modo Oscuro
-
+//Dimensiones NavBar
+const navbarHeight = height > 850 ? 120 : 80;
 
 /* Lista de Estilos */
 const styles = StyleSheet.create({
@@ -55,33 +53,56 @@ const styles = StyleSheet.create({
     viewPot: {
       flex: 1,
       alignItems: 'center',
-      justifyContent: 'center',
-      padding: 10,
-      backgroundColor: COLORS.sky
+      paddingTop: 30,
+      paddingBottom: 20,
     },
     imagePot: {
-      resizeMode: 'contain',
+      // resizeMode: 'contain',
       width: potWidth,
-      height: potHeight
+      height: potHeight,
     },
     facePot: {
       position: 'absolute',
-      top: faceTop,
       width: faceWidth,
       height: faceHeight,
-      resizeMode: 'contain'
+      resizeMode: 'contain',
+    },
+    //Credencial
+    credentialView: {
+      backgroundColor: 'white',
+      padding: 10,
+      borderRadius: 20,
+      borderWidth: 5,
+      borderColor: '#C69C6D',
+      alignContent: 'center',
+      justifyContent: 'center',
+      marginBottom: height > 850 ? 20 : 10,
+      marginTop: height > 850 ? 50 : 10,
+    },
+    credentialName: {
+      fontFamily: 'perolet',
+      fontSize: height > 850 ? 25 : 18,
+      color: '#332D21',
+      textAlign: 'center',
+    },
+    credentialLabel: {
+      fontFamily: 'perolet',
+      fontSize: height > 850 ? 25 : 18,
+      color: '#332D21',
+      textAlign: 'center',
     },
     // Mitad inferior con los datos y fondo
     imageBackground: {
-      resizeMode: 'strech',
-      marginBottom: 80,
+      backgroundColor: COLORS.darkGray,
+      resizeMode: 'contain',
     },
     mainView: {
       flexDirection: 'row',
-      justifyContent: 'center',
+      //justifyContent: 'center',
       alignItems: 'center',
       paddingTop: 15,
       paddingBottom: 15,
+      paddingHorizontal: 20,
     },
     dataText: {
       fontSize: height * 0.05,
@@ -92,7 +113,7 @@ const styles = StyleSheet.create({
       fontSize: height * 0.03,
       fontFamily: 'perolet',
       color: 'white',
-      paddingHorizontal: 10,
+      paddingLeft: 40,
     },
     //Boton de datos extras
     pressLecturaButton: {
@@ -110,70 +131,75 @@ const styles = StyleSheet.create({
     },
     pressLecturaButtonText: {
       color: 'white',
-      fontWeight: 'bold',
-      fontSize: height > 850 ? 26 : 20,
+      fontFamily: 'perolet',
+      fontSize: height > 850 ? 35 : 20,
+      
     },
     //Modal que se abre al apretar saber mas
     containerModal: {
       flex: 1,
-      width: Dimensions.get('window').width,
-      height: Dimensions.get('window').height,
       alignItems: 'center',
       paddingHorizontal: 15,
       backgroundColor: 'rgba(0, 0, 0, 0.8)',
     },
     LecturaTextTitle:{
+      fontFamily: 'open-sans-Bold',
       color: 'white',
       fontSize: height > 850 ? 40 : 20,
-      fontWeight: '900',
       padding: 20,
-      textAlign: 'center',
-      textShadowColor: 'black', 
+      TextAlign: 'center',
     },
     dataSensor: {
       justifyContent: "center",
       alignItems: "center",
       width: width * 0.9,
-      height: height > 850 ? height * 0.85 : height * 0.7,
+      height: height > 850 ? height * 0.9 : height * 0.83,
       backgroundColor: "rgba(0, 0, 0, 0.7)",
       flexDirection: "column", // Cambiamos a dirección vertical
-      paddingHorizontal: "28%",
+      paddingHorizontal: 50,
       borderRadius: 30,
       borderWidth: 1,
       borderColor: 'white',
     },
     maceta: {
       flex: 1,
-      justifyContent: "center",
+      paddingTop: 30,
       alignItems: "center",
     },
     dataTextModal: {
-      fontSize: height > 850 ? 40 : 20,
+      fontSize: height > 850 ? 45 : 25,
       fontWeight: "200",
       color: 'white',
       textAlign: "center",
     },
+    descriptionDataTextModal: {
+      textAlign: 'justify',
+      fontSize: height > 850 ? 20 : 15,
+      fontFamily: 'open-sans',
+      color: 'white'
+    },
     title: {
-      fontSize: height > 850 ? 40 : 20,
-      fontWeight: "bold",
+      fontFamily: 'open-sans-Bold',
+      fontSize: height > 850 ? 35 : 20,
       color: 'white',
       textAlign: "center",
     },
     closeButton: {
       backgroundColor: 'white',
+      fontFamily: 'open-sans',
       borderRadius: 20,
       padding: 15,
       elevation: 2,
-      marginTop: 10,
+      marginTop: 40,
       marginBottom: 15,
       justifyContent: 'center',
       alignItems: 'center',
       width: width * 0.6,
-      height: height > 850 ? height * 0.05 : height * 0.1,
+      height: height > 850 ? height * 0.05 : height * 0.07,
     },
     closeButtonText: {
       color: 'black',
-      fontWeight: 'bold',
+      fontFamily: 'open-sans-Bold',
       fontSize: height > 850 ? 22 : 16,
       FontDisplay: 'center',
 
@@ -181,15 +207,15 @@ const styles = StyleSheet.create({
   },
  
   wikiScreen: {
-    scrollView: { },
+    scrollView: { 
+      backgroundColor: COLORS.apple50,
+    },
     viewContainer: {
       flex: 1,
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'center',
-      paddingTop:40,
-      paddingBottom: 90,
-      paddingHorizontal: 10,
+      paddingTop: 20, 
     },
     image: {
       width: width,
@@ -200,6 +226,7 @@ const styles = StyleSheet.create({
   plantas: {
     container: {
       paddingBottom: 10,
+      paddingHorizontal: 50,
     },
     button: {
       width: plantasButtonWidth,
@@ -228,11 +255,9 @@ const styles = StyleSheet.create({
     },
     buttonText: {
       fontFamily: 'perolet',
-      fontSize: 20,
-      textTransform: 'lowercase',
-      fontWeight: 500,
+      fontSize: 23,
       marginTop: 5,
-      color: COLORS.dun
+      color: COLORS.apple950
     },
     circle: {
       backgroundColor: COLORS.violet,
@@ -245,9 +270,20 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
+    closeButton: {
+      backgroundColor: 'white',
+      fontFamily: 'open-sans',
+      borderRadius: 20,
+      padding: 15,
+      elevation: 2,
+      marginTop: 10,
+      marginBottom: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: width * 0.6,
+      height: height > 850 ? height * 0.05 : height * 0.07,
+    },
   },
-
-
 
   plantCard: {
     mainView: {
@@ -256,6 +292,7 @@ const styles = StyleSheet.create({
     },
     description: {
       flex: 1,
+      fontFamily: 'open-sans',
       backgroundColor: "transparent",
       paddingHorizontal: 20,
       marginTop: 10,
@@ -269,30 +306,82 @@ const styles = StyleSheet.create({
     imageCarousel: {
       height: (height * 0.5),
       width: width,
-    }
+    },
+    //LOGOS
+    credentialContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-evenly',
+      flexWrap: 'wrap',
+    },
+    credentialView: {
+      flexWrap: 'wrap',
+      alignItems: 'center',
+      justifyContent: 'center',
+
+      backgroundColor: COLORS.apple300,
+
+      height: height > 850 ? 130 : 100,
+      width: '30%',
+      height: height * 0.2,
+      alignContent: 'center',
+      justifyContent: 'center',
+
+      borderRadius: height > 850 ? 20 : 20,
+      
+      marginBottom: height > 850 ? 20 : 10,
+      marginTop: height > 850 ? 40 : 20,
+    },
+    credentialName: {
+      fontFamily: 'perolet',
+      fontSize: height > 850 ? 25 : 15,
+      marginLeft: height > 850 ? 15 : 5,
+      color: '#332D21',
+      marginBottom: 5,
+    },
+    credentialLabel: {
+      width: '90%',
+      borderRadius: 10,
+      fontFamily: 'perolet',
+      fontSize: height > 850 ? 25 : 15,
+      textAlign: 'center',
+      color: '#332D21',
+      backgroundColor: COLORS.apple200,
+    },
+    icon: {
+      marginBottom: 5,
+    },
     
   },
   
   caras: {
     container: {
       flex: 1,
-      paddingTop: 20,
-      paddingBottom: 80,
-      backgroundColor: COLORS.sky,
+      backgroundColor: COLORS.apple50,
     },
-    viewHeaderText: {
-      
-    },
-    expressionContainer: {
+    viewFlatList:{
       flex: 1,
-      flexDirection: 'row',
-      flexWrap: 'wrap',
+      backgroundColor: COLORS.apple50,
+      paddingTop: 20,
+    },
+    viewPotExpression: {
+      flex: 1,
+      alignItems: 'center',
+      paddingBottom: 20,
+    },
+    screenContainer: {
+      flex: 1,
+      flexDirection: 'Column',
+      alignItems: 'center',
       justifyContent: 'space-evenly',
       paddingTop: 15,
     },
     expressionButton: {
-      borderRadius: 25,
+      borderRadius: 10,
       backgroundColor: 'black',
+    },
+    expressionContainer: {
+      width: width,
+      alignItems: 'center',
     },
     expressionButtonShadow: {
       shadowColor: 'black',
@@ -306,71 +395,48 @@ const styles = StyleSheet.create({
     },
     expression: {
       resizeMode: 'contain',
-      height: plantasButtonHeight,
-      width: plantasButtonWidth,
+      height: height * 0.28,
+      width: width * 0.58,
     },
     expressionText: {
       fontFamily: 'perolet',
       marginTop: 5,
       textAlign: 'center',
       fontSize: 25,
-      paddingBottom: 35,
-      color: COLORS.dun,
+      paddingBottom: 10,
+      color: COLORS.apple950,
     },
     image: {
       flex: 1,
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
     },
-    //Pagina Modal
-    modalContaier: {
-      flexGrow: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    //Maceta con expresiones:
+    pot: {      
+      width: width * 0.55,
+      height: height * 0.35,
     },
-    modalSubContainer: {
-      backgroundColor: '#1d3244',
-      width: '100%',
-      height: '100%',
-    },
-    modalImage: {
+    facePot: {
+      position: 'absolute',
+      width: 140,
+      height: 90,
+      top: 65,
+      left: 107,
       resizeMode: 'contain',
-      width: '90%',
-      height: height * 0.45,
-      alignSelf: 'center'
-    },
-    modalScroll: {
-      flex: 1,
-      marginTop: 10,
-    },
-    modalText: {
-      color: '#ffffff',
-      textAlign: 'center',
-      fontSize: 25,
-      paddingHorizontal: 20,
-    },
-    pressable: {
-      marginTop: 10,
-    },
-    pressableButton: {
-      color: '#e8ff65',
-      textAlign: 'center',
-      fontSize: 22,
-      paddingVertical: 10
     },
   },
+
   switch: {
     container: {
       flex: 1,
       paddingTop: 10,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
+      flexDirection: 'column',
+      //justifyContent: 'space-between',
       flexWrap: 'wrap',
-      paddingHorizontal: 10,
+      backgroundColor: COLORS.apple50,
     },
     text: {
+      fontFamily: 'open-sans',
       fontSize: 25,
       padding: 10,
     },

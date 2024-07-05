@@ -1,18 +1,4 @@
 export const COLORS = {
-    // white: "#fff",
-    // black: "#000",
-    // grey: "#303030",
-    // green: "#7bc568",
-    // mediumGreen: "#13957b",
-    // darkGreen: "#336327",
-    // blueGreen: "#58aa98",
-    // creamGreen: "#bae057",
-    // brown: "#3d3425",
-    // darkBrown: "#2f2a1f",
-    // tomato: "#ff6347",
-    // water: "#24a7ff",
-    // wave: "#9ed8ff",
-    // Valores de la nueva paleta
     dun : "#3a342d",
     lemon: "#F8F49A",
     darkGreen: "#31695A",
@@ -22,8 +8,28 @@ export const COLORS = {
     weakGreen: "#84c896",
     blue: "#44E5E7",
     lightBlue: "#59D2FE",
-    water: "#4A8FE7",
     sky: "#d1ecff",
-    violet: "#842f6d",
-
+    violet: "#80396E",
+    // Valores para las plantas
+    // Predeterminado
+    darkGray: "#373C37",
+    lightGray: "#808080",
+    mediumGray: "#55594D",
+    // Valores de los circulos
+    water: "#1B9FE1",
+    humidity: "#B6CCEB",
+    uvLight: "#ECDBB6",
+    // Valores de planta
+    apple50: "#f5faf3",
+    apple100: "#e7f5e3",
+    apple200: "#ceeac8",
+    apple300: "#a8d89d",
+    apple400: "#78be6a",
+    apple500: "#5eb34d",
+    apple600: "#418534",
+    apple700: "#36692c",
+    apple800: "#2e5427",
+    apple900: "#274522",
+    apple950: "#10250e",
+    apple950Inverse: "white"
 }

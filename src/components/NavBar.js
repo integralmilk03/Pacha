@@ -9,24 +9,29 @@ import Conexion from "./Conexiones/Conexion";
 import { View, Text } from "react-native";
 import { COLORS } from './Styles/color.js';
 import styles, {height} from "./Styles/styles.js";
-import { useTheme } from "@react-navigation/native";
+
+// Screen1.navigationOptions = {
+//     headerStyle: {
+//       backgroundColor: 'blue',
+//     },
+// };
 
 
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
-    const { colors } = useTheme();
+    
     return(
         <Tab.Navigator
         screenOptions={{
-            tabBarActiveTintColor: COLORS.darkGreen,
-            tabBarInactiveTintColor: COLORS.dun,
+            tabBarActiveTintColor: COLORS.apple700,
+            tabBarInactiveTintColor: COLORS.apple950,
             tabBarShowLabel: false,
             tabBarStyle:{
-                position: 'absolute',
-                backgroundColor: colors.card,
+                backgroundColor: 'white',
                 height: height > 850 ? 120 : 80,
-            }
+            },
+            
         }}
         >
             <Tab.Screen name="Home" component={Sensors} options={{unmountOnBlur: true, headerShown: false,
@@ -35,42 +40,46 @@ const Tabs = () => {
                     <Icon 
                     name="home"
                     size={height > 850 ? 50 : 30}
-                    color= {focused ? COLORS.darkGreen : COLORS.dun}
+                    color= {focused ? COLORS.apple700 : COLORS.apple950}
                     />
-                    <Text style={{color: focused ? COLORS.darkGreen : COLORS.dun}}>HOME</Text>
+                    <Text style={{color: focused ? COLORS.apple700 : COLORS.apple950, fontFamily: 'open-sans'}}>HOME</Text>
                 </View>
-            )}}/>
-            <Tab.Screen name="Wiki" component={Wiki} options={{ headerShown: false,
+            )}}
+            />
+
+            <Tab.Screen name="Wiki" component={Wiki} options={{ title: 'Catalago de plantas', headerStyle: {backgroundColor: COLORS.apple50},
             tabBarIcon: ({focused}) => (
                 <View style={styles.NavBar.viewIcon}>
                     <Icon 
                         name="book"
                         size={height > 850 ? 50 : 30}
-                        color= {focused ? COLORS.darkGreen : COLORS.dun}
+                        color= {focused ? COLORS.apple700 : COLORS.apple950}
                     />
-                    <Text style={{color: focused ? COLORS.darkGreen : COLORS.dun}}>WIKI</Text>
+                    <Text style={{color: focused ? COLORS.apple700 : COLORS.apple950, fontFamily: 'open-sans'}}>WIKI</Text>
                 </View>
             )}}/>
-            <Tab.Screen name="Expresiones" component={Caras} options={{ headerShown: false,
+
+            <Tab.Screen name="Expresiones" component={Caras} options={{ title: 'Expresiones de tu pacha', headerStyle: {backgroundColor: COLORS.apple50},
             tabBarIcon: ({focused}) => (
                 <View style={styles.NavBar.viewIcon}>
                     <Icon 
                         name="smile-o"
                         size={height > 850 ? 50 : 30}
-                        color= {focused ? COLORS.darkGreen : COLORS.dun}
+                        color= {focused ? COLORS.apple700 : COLORS.apple950}
                     />
-                    <Text style={{color: focused ? COLORS.darkGreen : COLORS.dun}}>FACES</Text>
+                    <Text style={{color: focused ? COLORS.apple700 : COLORS.apple950, fontFamily: 'open-sans'}}>FACES</Text>
                 </View>
             )}}/>
-            <Tab.Screen name="Settings" component={Conexion} options={{
+
+            <Tab.Screen name="Settings" component={Conexion} options={{ headerStyle: {backgroundColor: COLORS.apple50},
             tabBarIcon: ({focused}) => (
                 <View style={styles.NavBar.viewIcon}>
                     <Icon 
                         name="gears"
                         size={height > 850 ? 50 : 30}
-                        color= {focused ? COLORS.darkGreen : COLORS.dun}
+                        color= {focused ? COLORS.apple700 : COLORS.apple950}
                     />
-                    <Text style={{color: focused ? COLORS.darkGreen : COLORS.dun}}>SETTINGS</Text>
+                    <Text style={{color: focused ? COLORS.apple700 : COLORS.apple950, fontFamily: 'open-sans'}}>SETTINGS</Text>
                 </View>
             )}}/>
         </Tab.Navigator>

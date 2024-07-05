@@ -9,7 +9,7 @@ export const expresionId = {
 };
 export const expresiones = [
     {
-        label: 'Feliz',
+        label: 'Alegre',
         imageSource: require('../../../img/expresiones/expresionFelizImg.jpg'),
         gifSource: require('../../../img/expresiones/expresionFeliz.gif'),
         description: 'Este es un indicativo de que estas cuidando bien tu planta',
@@ -21,7 +21,7 @@ export const expresiones = [
         description: 'Tal vez no estas teniendo los mejores cuidados',
     },
     {
-        label: 'Sed',
+        label: 'Sedienta',
         imageSource: require('../../../img/expresiones/aguaMuchoImg.jpg'),
         gifSource: require('../../../img/expresiones/aguaMucho.gif'),
         description: 'Riega a tu planta, no queremos que se deshidrate',

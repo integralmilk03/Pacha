@@ -20,6 +20,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.integralmilk.pachapp"
+      
     },
     "web": {
       "favicon": "./assets/favicon.png"
