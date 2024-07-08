@@ -1,22 +1,28 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { COLORS } from './color.js';
 
-
 //Variables
 export const width = Dimensions.get("window").width;
 export const height = Dimensions.get("window").height;
+//Funciones
+const RH = (percentage) => {
+  (percentage / 100) * height;
+};
+const RW = (percentage) => {
+  (percentage / 100) * width;
+};
 //Dimensiones para MAIN
-const potHeight = height * 0.6; 
-const potWidth = width ;
+const potHeight = height * 0.65; 
+const potWidth = width * 0.9;
+
 const faceHeight = height > 850 ? potHeight * 0.3 : potHeight * 0.2;
 const faceWidth = width > 500 ? potWidth * 0.53 : potWidth * 0.55;
 //Dimensiones para WIKI
-const plantasButtonHeight = 275;
-const plantasButtonWidth = 295;
+const plantasButtonHeight = height > 850 ? height * 0.2 : height * 0.4;
+const plantasButtonWidth = width > 500 ? width * 0.35 : width * 0.85;
 const plantasImagenHeight = plantasButtonHeight - 50;
 const plantasImagenWidth = plantasButtonWidth - 50;
 //Dimensiones NavBar
-const navbarHeight = height > 850 ? 120 : 80;
 
 /* Lista de Estilos */
 const styles = StyleSheet.create({
@@ -53,19 +59,22 @@ const styles = StyleSheet.create({
     viewPot: {
       flex: 1,
       alignItems: 'center',
-      paddingTop: 30,
+      paddingTop: 10,
       paddingBottom: 20,
+      justifyContent: 'center',
     },
     imagePot: {
-      // resizeMode: 'contain',
+      resizeMode: 'contain',
       width: potWidth,
       height: potHeight,
     },
     facePot: {
       position: 'absolute',
-      width: faceWidth,
-      height: faceHeight,
+      width: width * 0.3,
+      height: height * 0.5,
       resizeMode: 'contain',
+      top: height * 0.18,
+
     },
     //Credencial
     credentialView: {
@@ -98,36 +107,33 @@ const styles = StyleSheet.create({
     },
     mainView: {
       flexDirection: 'row',
-      //justifyContent: 'center',
       alignItems: 'center',
-      paddingTop: 15,
-      paddingBottom: 15,
-      paddingHorizontal: 20,
+      justifyContent: 'space-around',
+      paddingTop: height * 0.02,
+      paddingBottom: height * 0.02,
     },
     dataText: {
-      fontSize: height * 0.05,
+      fontSize: height * 0.04,
       fontFamily: 'perolet',
       color: 'white',
     },
     labelText: {
       fontSize: height * 0.03,
+      paddingHorizontal: height * 0.01,
       fontFamily: 'perolet',
       color: 'white',
-      paddingLeft: 40,
+      
     },
     //Boton de datos extras
     pressLecturaButton: {
       backgroundColor: COLORS.mediumGreen2,
-      borderWidth: 1, // Agregar borde
-      borderColor: 'black', // Color del borde
-      borderRadius: 20,
-      padding: 10,
-      paddingHorizontal: 50,
-      marginBottom: height > 850 ? 60 : 20,
-      marginTop: 20,
-      elevation: 2,
+      borderColor: 'black',
+      flex: 1,
+      padding: height * 0.01,
+      marginBottom: height * 0.03,
       alignSelf: 'center',
       alignItems: 'center',
+      borderRadius: 1000,
     },
     pressLecturaButtonText: {
       color: 'white',
@@ -195,12 +201,12 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
       width: width * 0.6,
-      height: height > 850 ? height * 0.05 : height * 0.07,
+      height: height > 850 ? height * 0.05 : height * 0.085,
     },
     closeButtonText: {
       color: 'black',
       fontFamily: 'open-sans-Bold',
-      fontSize: height > 850 ? 22 : 16,
+      fontSize: height > 850 ? 22 : 14,
       FontDisplay: 'center',
 
     },
@@ -225,7 +231,7 @@ const styles = StyleSheet.create({
 
   plantas: {
     container: {
-      paddingBottom: 10,
+      paddingBottom: 20,
       paddingHorizontal: 50,
     },
     button: {
@@ -251,12 +257,12 @@ const styles = StyleSheet.create({
       width: plantasImagenWidth,
       height: plantasImagenHeight,
       borderRadius: 25,
-      marginTop: 5,
+      marginTop: 20,
     },
     buttonText: {
-      fontFamily: 'perolet',
-      fontSize: 23,
-      marginTop: 5,
+      fontFamily: 'open-sans',
+      fontSize: height > 850 ? height * 0.015 : height * 0.03,
+      marginBottom: 10,
       color: COLORS.apple950
     },
     circle: {
@@ -274,14 +280,98 @@ const styles = StyleSheet.create({
       backgroundColor: 'white',
       fontFamily: 'open-sans',
       borderRadius: 20,
-      padding: 15,
       elevation: 2,
       marginTop: 10,
       marginBottom: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: width * 0.6,
+      height: height > 850 ? height * 0.05 : height * 0.08,
+    },
+    closeButtonText: {
+      color: 'black',
+      fontFamily: 'open-sans-Bold',
+      fontSize: height > 850 ? 22 : 14,
+      FontDisplay: 'center',
+    },
+  },
+  customCard: {
+    container:{
+      flex: 1,
+      backgroundColor: COLORS.apple950,
+      alignContent: 'center',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    textTitle: {
+      fontFamily: 'open-sans',
+      fontSize: height > 850 ? 25 : 20,
+      color: 'white',
+      padding: 20,
+    },
+    inputText:{
+      marginTop: 20,
+      paddingHorizontal: width * 0.2,
+      padding: height * 0.01,
+      borderRadius: 100,
+      backgroundColor: COLORS.apple300,
+      marginBottom: 20,
+    },
+    daysContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around',
+    },
+    daysCard: {
+      backgroundColor: COLORS.apple200, // apple200
+      borderRadius: 100,
+      padding: 10,
+      margin: height > 850 ? 10 : 5,
+      width: '17%', // adjust this to fit 3 boxes per row
+      alignItems: 'center'
+    },
+    daysText: {
+      color: COLORS.apple900,
+      fontWeight: 'bold',
+      fontSize: height > 850 ? 20 : 12,
+    },
+    touchableContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      paddingTop: 20,
+      paddingBottom: 20,
+    },
+    touchableSign: {
+      backgroundColor: COLORS.apple800,
+      height: 40,
+      width: 40,
+      borderRadius: 50,
+      marginHorizontal: 20,
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    touchableLabel: {
+      height: 50,
+      backgroundColor: COLORS.apple950,
+      fontSize: 20,
+      fontFamily: 'open-sans',
+    },
+    touchableLabelButton: {
+      height: 50,
+      backgroundColor: COLORS.apple950,
+      fontSize: 30,
+      fontFamily: 'open-sans',
+    },
+    closeButton:{
+      backgroundColor: 'white',
+      fontFamily: 'open-sans',
+      borderRadius: 20,
+      padding: 15,
       justifyContent: 'center',
       alignItems: 'center',
       width: width * 0.6,
-      height: height > 850 ? height * 0.05 : height * 0.07,
+      height: height > 850 ? height * 0.05 : height * 0.085,
     },
   },
 
@@ -293,11 +383,10 @@ const styles = StyleSheet.create({
     description: {
       flex: 1,
       fontFamily: 'open-sans',
-      backgroundColor: "transparent",
-      paddingHorizontal: 20,
-      marginTop: 10,
-      paddingBottom: 55,
-      fontSize: height > 850 ? 38 : 22,
+      paddingHorizontal: 10,
+      paddingBottom: 80,
+      fontSize: height > 850 ? 40 : 20,
+      textAlign: 'justify'
     },
     image: {
       width: "100%",
@@ -320,31 +409,30 @@ const styles = StyleSheet.create({
 
       backgroundColor: COLORS.apple300,
 
-      height: height > 850 ? 130 : 100,
+      height: height > 850 ? height * 0.1 : height * 0.2,
       width: '30%',
-      height: height * 0.2,
       alignContent: 'center',
       justifyContent: 'center',
 
-      borderRadius: height > 850 ? 20 : 20,
+      borderRadius: 20,
       
       marginBottom: height > 850 ? 20 : 10,
       marginTop: height > 850 ? 40 : 20,
     },
     credentialName: {
-      fontFamily: 'perolet',
+      fontFamily: 'open-sans',
       fontSize: height > 850 ? 25 : 15,
       marginLeft: height > 850 ? 15 : 5,
-      color: '#332D21',
+      color: 'black',
       marginBottom: 5,
     },
     credentialLabel: {
       width: '90%',
       borderRadius: 10,
-      fontFamily: 'perolet',
+      fontFamily: 'open-sans',
       fontSize: height > 850 ? 25 : 15,
       textAlign: 'center',
-      color: '#332D21',
+      color: 'black',
       backgroundColor: COLORS.apple200,
     },
     icon: {
@@ -357,16 +445,18 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: COLORS.apple50,
+      justifyContent: 'space-around',
+      alignItems: 'center',
     },
     viewFlatList:{
-      flex: 1,
       backgroundColor: COLORS.apple50,
       paddingTop: 20,
+      paddingBottom: 20,
     },
     viewPotExpression: {
-      flex: 1,
       alignItems: 'center',
       paddingBottom: 20,
+      paddingTop: 20,
     },
     screenContainer: {
       flex: 1,
@@ -403,7 +493,6 @@ const styles = StyleSheet.create({
       marginTop: 5,
       textAlign: 'center',
       fontSize: 25,
-      paddingBottom: 10,
       color: COLORS.apple950,
     },
     image: {
@@ -412,16 +501,18 @@ const styles = StyleSheet.create({
       height: Dimensions.get('window').height,
     },
     //Maceta con expresiones:
-    pot: {      
-      width: width * 0.55,
-      height: height * 0.35,
+    pot: {
+      width: width * 0.8,
+      height: height * 0.38,
+      marginTop: 10,
     },
     facePot: {
+      width: width * 0.3,
+      height: height * 0.5,
       position: 'absolute',
-      width: 140,
-      height: 90,
-      top: 65,
-      left: 107,
+      top: -90,
+      // top: height > 850 ? height * 0.1: height * 0.12,
+      // left: width > 500 ? width * 0.3 : width * 0.3,
       resizeMode: 'contain',
     },
   },
@@ -442,7 +533,7 @@ const styles = StyleSheet.create({
     },
   },
   pacha: {
-    container: {
+    containr: {
       alignItems: 'center',
       justifyContent: 'center',
       marginBottom: 50,
@@ -475,8 +566,12 @@ const styles = StyleSheet.create({
     viewIcon: {
       alignItems: 'center',
       justifyContent: 'center',
-      width: 90,
-    }
+      width: 100,
+    },
+    text: {
+      fontFamily: 'open-sans',
+      fontSize: height > 850 ? 20 : 15
+    },
   }
 });
 

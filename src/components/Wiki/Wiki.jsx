@@ -141,92 +141,52 @@ const Wiki = ({ }) => {
     >
       {/* behavior="position" enabled */}
       
-      <View style={{flex: 1, backgroundColor: COLORS.apple950, alignContent: 'center', alignItems: 'center'}}>
-        <Text style={{fontFamily: 'open-sans', fontSize: 20, color: 'white', padding: 20,}}>Nombre (Apodo):</Text>
+      <View style={styles.customCard.container}>
+        <Text style={styles.customCard.textTitle}>Nombre:</Text>
         <TextInput
-        style={{
-          marginTop: 20,
-          width: 300,
-          height: 40,
-          paddingHorizontal: 10,
-          borderRadius: 50,
-          backgroundColor: COLORS.apple300,
-          marginBottom: 10,
-        }}
+        style={styles.customCard.inputText}
         placeholder="ej. Pachasaurio"
         onChangeText={onChangeName}
         value={name}
         />
 
-        <Text style={{fontFamily: 'open-sans', fontSize: 20, color: 'white', padding: 15}}>Genero (opcional):</Text>
+        <Text style={styles.customCard.textTitle}>Genero (opcional):</Text>
         <TextInput
-        style={{
-          marginTop: 20,
-          width: 300,
-          height: 40,
-          paddingHorizontal: 10,
-          borderRadius: 50,
-          backgroundColor: COLORS.apple300,
-          marginBottom: 10,
-        }}
+        style={styles.customCard.inputText}
         placeholder="ej. Cactus Cebra"
         onChangeText={onChangeGenre}
         value={genre}
         />
 
-        <Text style={{fontFamily: 'open-sans', fontSize: 20, color: 'white', padding: 15}}>Dias de Riego:</Text>
-        <View style={{
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        padding: 10,}}>
+        <Text style={styles.customCard.textTitle}>Dias de Riego:</Text>
+        <View style={styles.customCard.daysContainer}>
           {daysOfWeek.map((day) => (
             <TouchableOpacity
               key={day}
-              style={[{
-                backgroundColor: '#ceeac8', // apple200
-                borderRadius: 10,
-                padding: 10,
-                margin: 5,
-                width: '17%', // adjust this to fit 3 boxes per row
-                alignItems: 'center'},
+              style={[styles.customCard.daysCard,
                 selectedDays.includes(day) && {backgroundColor: '#78be6a',},
               ]}
               onPress={() => handleDayPress(day)}
             >
-              <Text style={[{
-                color: '#274522', // apple900
-                fontWeight: 'bold',
-              },
+              <Text style={[styles.customCard.daysText,
                 selectedDays.includes(day) && {color: '#ffffff',}
               ]}>{day}</Text>
             </TouchableOpacity>
           ))}
         </View>
 
-        <View style={{
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          alignItems: 'center',
-          paddingTop: 15,
-          paddingBottom: 15,
-        }}>
+        <View style={styles.customCard.touchableContainer}>
 
-          <Text style={{fontFamily: 'open-sans', fontSize: 20, color: 'white'}}>Horas al sol:</Text>
+          <Text style={styles.customCard.textTitle}>Horas al sol:</Text>
 
-          <Pressable style={{backgroundColor: COLORS.apple800, height: 50, width: 50, borderRadius: 50, marginHorizontal: 20, alignItems: 'center', justifyContent: 'center'}}
+          <Pressable style={styles.customCard.touchableSign}
             onPress={() => sunLight == 0 ? setSunLight(0) : setSunLight(sunLight - 1)}
           >
-            <Icon name="minus" size={30} color={COLORS.apple950Inverse} />
+            <Icon name="minus" size={20} color={COLORS.apple950Inverse} />
           </Pressable>
 
           <TextInput
-          style={{
-            height: 50,
-            backgroundColor: COLORS.apple950,
-            fontSize: 30,
-            fontFamily: 'open-sans',
-          }}
+          style={styles.customCard.touchableLabelButton}
           editable={false}
           placeholder={sunLight.toString()}
           placeholderTextColor={'white'}
@@ -235,15 +195,15 @@ const Wiki = ({ }) => {
           value={sunLight}
           />
 
-          <Pressable style={{backgroundColor: COLORS.apple800, height: 50, width: 50, borderRadius: 50, marginHorizontal: 20, alignItems: 'center', justifyContent: 'center'}}
+          <Pressable style={styles.customCard.touchableSign}
             onPress={() => setSunLight(sunLight + 1)}
           >
-            <Icon name="plus" size={30} color={COLORS.apple950Inverse} />
+            <Icon name="plus" size={20} color={COLORS.apple950Inverse} />
           </Pressable>
         </View>
         
         <TouchableOpacity
-        style={styles.mainScreen.closeButton}
+        style={styles.customCard.closeButton}
         onPress={() => {
           console.log(selectedDays.length)
           if(!(name && sunLight && selectedDays.length)) {

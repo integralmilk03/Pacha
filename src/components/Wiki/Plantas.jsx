@@ -54,7 +54,7 @@ const FloatingButton = ( label ) => {
       plant.selected = true;
       lastPlant = plants[plantId];
       
-      getPachaName(plant.name, nickName);
+      getPachaName(plant.name, 'Pacha'); //CAMBIO nickName
       setBackground(plant.imageSourceBackground);
       setColorBackground(plant.color);
       setPachaBackground(plant.imageBackground);
@@ -88,7 +88,8 @@ const FloatingButton = ( label ) => {
             style: 'cancel',
           },
           {text: 'OK', onPress: () => {
-            openModal();
+            // openModal();
+            handler();
           }},
         ]
       )

@@ -39,9 +39,9 @@ export const plantsData = [
       imageSourceBackground: require('../../../img/plantasWiki/primulas-background.png'),
 
 
-      sunLight: "---",
-      water: "---",
-      care: "---",
+      sunLight: "moderado",
+      water: "cada 2-3 días",
+      care: "parcial",
 
       description: "Las prímulas (Primula spp.), también conocidas como primaveras o primaveras de jardín (por ser la primera en florecer), es un género de plantas de la familia de las primuláceas.",
       selected: false,
@@ -66,9 +66,9 @@ export const plantsData = [
       color: "#A25C72",
       imageBackground: require("../../../img/pachas/pacha_paleta_pintor.png"),
 
-      sunLight: "---",
-      water: "---",
-      care: "---",
+      sunLight: "moderado",
+      water: "cada 1-2 días",
+      care: "parcial",
 
       imageSource: require("../../../img/plantasWiki/paleta-pintor.jpg"),
       imageSourceBackground: require('../../../img/plantasWiki/paleta-pintor-background.png'),
@@ -95,9 +95,9 @@ export const plantsData = [
       color: "#395431",
       imageBackground: require("../../../img/pachas/pacha_cactus_conejo.png"),
 
-      sunLight: "---",
-      water: "---",
-      care: "---",
+      sunLight: "facil",
+      water: "cada 14 días",
+      care: "extenso",
 
       imageSource: require("../../../img/plantasWiki/cactus-conejo.jpg"),
       imageSourceBackground: require('../../../img/plantasWiki/cactus-conejo-background.png'),
@@ -124,9 +124,9 @@ export const plantsData = [
       color: "#649957",
       imageBackground: require("../../../img/pachas/pacha_aloe_vera.png"),
 
-      sunLight: "---",
-      water: "---",
-      care: "---",
+      sunLight: "facil",
+      water: "cada 20 días",
+      care: "extenso",
 
       imageSource: require("../../../img/plantasWiki/aloe-vera.jpg"),
       imageSourceBackground: require('../../../img/plantasWiki/aloe-vera-background.png'),
@@ -148,14 +148,14 @@ export const plantsData = [
     },
     {
       id: 6,
-      name: "Karaconcha",
+      name: "Karanchoa",
 
       color: "#AB414B",
       imageBackground: require("../../../img/pachas/pacha_karaconcha.png"),
 
-      sunLight: "---",
-      water: "---",
-      care: "---",
+      sunLight: "facil",
+      water: "cada 10 días",
+      care: "extenso",
 
       imageSource: require("../../../img/plantasWiki/karaconcha.jpg"),
       imageSourceBackground: require('../../../img/plantasWiki/karaconcha-background.png'),
@@ -183,5 +183,5 @@ export const plantsData = [
     "Paleta Pintor": 3,
     "Cactus Conejo": 4,
     "Aloe Vera": 5,
-    "Karaconcha": 6,
+    "Karanchoa": 6,
 };

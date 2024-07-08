@@ -10,10 +10,8 @@ import {
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
 import { expresiones } from '../Expresiones/valuesCaras.js';
 import { db, ref, onValue } from "../../firebase.js";
-
 import styles, { height, width } from '../Styles/styles.js';
 import { COLORS } from '../Styles/color.js';
 
@@ -30,9 +28,9 @@ const defaultPacha = require('../../../img/pachas/pacha_empty.png');
 // const defaultPacha = require('../../../img/plantasWiki/karaconcha.png');
 
 // Valores de temperatura ** DEBEN SER LEIDOS DESDE LA FIREBASE
-const fillLevel = 0;
-const fillHumedity = 0;
-const filluvLight = 0;
+const fillLevel = 20;
+const fillHumedity = 50;
+const filluvLight = 75;
 
 // Constantes para el firebase
 const expresionesFirebase = {
@@ -64,7 +62,7 @@ const circularProgress = (data, label, color, fillValue) => {
     <View style={styles.mainScreen.mainView}>
         <AnimatedCircularProgress
             size={height * 0.2}
-            width={height * 0.02}
+            width={height * 0.015}
             fill={fillValue}
             tintColor={color}
             backgroundColor={COLORS.mediumGray}>
@@ -96,13 +94,13 @@ const Sensor = () => {
     const [expresionImage, setExpresionImage] = useState(null);
     const [firebaseExpresion, setFirebaseExpresion] = useState(1);
     // PAGINA PRINCIPAL
-    const [temperatureExt, setTemperatureExt] = useState(0);   
-    const [humidityInt, sethumidityInt] = useState(0); //Capacitivo
+    const [temperatureExt, setTemperatureExt] = useState(35);   
+    const [humidityInt, sethumidityInt] = useState(50); //Capacitivo
     // PAGINA MODAL
-    const [humidityExt, setHumidityExt] = useState(0);
-    const [light, setLuz] = useState(0);
-    const [uvLight, setUvLight] = useState(0);
-
+    const [humidityExt, setHumidityExt] = useState(10);
+    const [light, setLuz] = useState(5);
+    const [uvLight, setUvLight] = useState(75);
+    const [level, setLevel] = useState(90);
 
 
     useEffect(() => {
@@ -140,7 +138,7 @@ const Sensor = () => {
     <View style={[styles.mainScreen.viewPot, {backgroundColor: colorBackground ? colorBackground : COLORS.lightGray}]}>
         <Image source={pachaBackground ? pachaBackground : defaultPacha} style={styles.mainScreen.imagePot}/>
         {expresionImage && (
-        <Image source={expresionImage} style={[styles.mainScreen.facePot, { top: pachaBackground ? (height  > 850 ? potHeight * 0.55 : potHeight * 0.77) : (height  > 850 ? potHeight * 0.36 : potHeight * 0.77) }]} />
+        <Image source={expresionImage} style={styles.mainScreen.facePot} />
         )}
         {/* Crendencial de indentificacion */}
         
@@ -148,6 +146,7 @@ const Sensor = () => {
             <Text style={styles.mainScreen.credentialName}>{pachaName}</Text>
             <Text style={styles.mainScreen.credentialLabel}>{PachaNickName}</Text>
         </View>}
+        
     </View>
         
     <ImageBackground source={background ? background : null} style={styles.mainScreen.imageBackground}>
@@ -175,12 +174,12 @@ const Sensor = () => {
             <Text style={styles.mainScreen.LecturaTextTitle}>Datos Técnicos De Tu Planta</Text>
             <View style={styles.mainScreen.dataSensor}>
             <ScrollView>
-                {dataModal(temperatureExt, 'ºC', 'Temperatura ambiental', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')}
-                {dataModal(humidityExt, '%', 'Humedad Ambiental', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')}
-                {dataModal(humidityInt, '%', 'Humedad de la maceta', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')}
-                {dataModal(humidityInt, '%', 'Luz General', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')}
-                {dataModal(humidityInt, '%', 'Luz UV', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')}
-                {dataModal(humidityInt, '%', 'Nivel de agua', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')}
+                {dataModal(temperatureExt, 'ºC', 'Temperatura ambiental', 'Esta medida es la temperatura de donde se encuentra tu Pacha.')}
+                {dataModal(humidityExt, '%', 'Humedad Relativa', 'Esta medida es la humedad externa de donde se encuentra tu Pacha.')}
+                {dataModal(humidityInt, '%', 'Humedad de la maceta', 'Esta medida es la humedad que tiene la tierra de tu Pacha. Los rangos son los siguientes: .')}
+                {dataModal(light, '%', 'Luz General', 'El sensor detecta la luz del ambiente, artificial o natural. Los rangos son los siguientes: ')}
+                {dataModal(uvLight, '%', 'Luz UV', 'El sensor detecta lo rayos UV del sol en uW/cm2. Pacha toma este valor y lo transforma en los siguientes rangos:\n0-20% Bajo \n30-50% Medio \n60-70% Alto\n80-100% Muy Alto')}
+                {dataModal(level, '%', 'Nivel de agua', 'Esta medida representa el porcentaje de agua en el tanque.')}
             </ScrollView>
             <TouchableOpacity
             style={styles.mainScreen.closeButton}

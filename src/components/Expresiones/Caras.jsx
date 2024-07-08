@@ -48,33 +48,31 @@ const Caras = () => {
   )};
 
   return (
-  <View style={styles.caras.container}>    
-    <ScrollView>
-      
-      <View style={styles.caras.viewFlatList}>
-        <FlatList
-        data={expresiones}
-        renderItem={({ item }) => carasImage(item)}
-        keyExtractor={(item, index) => index.toString()}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        pagingEnabled={true}
-        />
-      </View>
-
-      <View style={styles.caras.viewPotExpression}>
-        <Image
-        source={require('../../../img/pachas/pacha_empty.png')}
-        style={styles.caras.pot}
-        />
-
-        {visible && (
-        <Image source={expresionImage ? expresionImage : null} style={[styles.caras.facePot]}/>
-        )} 
-      </View>
      
-    </ScrollView>
+    <ScrollView>
+    <View style={styles.caras.container}> 
+      
+      <FlatList
+      data={expresiones}
+      renderItem={({ item }) => carasImage(item)}
+      keyExtractor={(item, index) => index.toString()}
+      horizontal={true}
+      showsHorizontalScrollIndicator={false}
+      pagingEnabled={true}
+      />
+
+      <Image
+      source={require('../../../img/pachas/pacha_faces.png')}
+      style={styles.caras.pot}
+      />
+
+      {visible && (
+      <Image source={expresionImage ? expresionImage : null} style={[styles.caras.facePot]}/>
+      )}      
+    
   </View>
+  </ScrollView>
+  
 )};
 
 export default Caras;
