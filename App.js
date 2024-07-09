@@ -1,16 +1,34 @@
-import { useCallback } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { View } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import {useColorScheme} from 'react-native';
+import { useColorScheme } from 'react-native';
 import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native'
 import Tabs from './src/components/NavBar.js';
 import FlashMessage from 'react-native-flash-message';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Login from './src/components/Login.jsx';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 SplashScreen.preventAutoHideAsync();
 
 
 export default function App() {
+  const [initialRoute, setInitialRoute] = useState('Login');
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      const userToken = await AsyncStorage.getItem('userToken');
+      if (userToken) {
+        setInitialRoute('Tabs');
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
 
   // Valores para el modo oscuro
   // const scheme = useColorScheme();
@@ -33,10 +51,13 @@ export default function App() {
   }
 
   return (
-    <View style={{flex: 1}} onLayout={onLayoutRootView}>
+    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
       {/* theme={MyTheme} */}
       <NavigationContainer>
-        <Tabs/>
+        <Stack.Navigator initialRouteName={initialRoute}>
+          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+          <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
+        </Stack.Navigator>
         <FlashMessage position="bottom" />
       </NavigationContainer>
     </View>
