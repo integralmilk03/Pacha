@@ -15,6 +15,12 @@ const plants = plantsData.reduce((acc, plant) => {
     return acc;
 }, {});
 
+export const sendDataToDatabase = (potSunLight, potWater, potWaterTime) => {
+  console.log(potSunLight);
+  console.log(potWater);
+  console.log(potWaterTime);
+};
+
 // Boton flotante del modal
 const FloatingButton = ( label ) => {
 
@@ -41,14 +47,14 @@ const FloatingButton = ( label ) => {
       plant.selected = true;
       lastPlant = plants[plantId];
       
-      getPachaName(plant.name, 'Pacha'); //CAMBIO nickName
+      getPachaName(plant.name, nickName); //CAMBIO nickName
       setBackground(plant.imageSourceBackground);
       setColorBackground(plant.color);
       setPachaBackground(plant.imageBackground);
+      sendDataToDatabase(plant.potWater, plant.potWaterTime, plant.potSunLight);
     
     }
 
-    
     else{
       Alert.alert('ADVERTENCIA', `No se encontro planta con el nombre ${label.name}`)
     }
@@ -75,8 +81,7 @@ const FloatingButton = ( label ) => {
             style: 'cancel',
           },
           {text: 'OK', onPress: () => {
-            // openModal();
-            handler();
+            openModal();
           }},
         ]
       )

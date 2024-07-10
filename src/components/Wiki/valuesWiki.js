@@ -13,6 +13,11 @@ export const plantsData = [
       water: "cada 10-14 días",
       care: "facil",
 
+      potWater: 3,
+      potWaterTime: '12:00',
+      potSunLight: 3,
+      
+
       description: "El musgo de estrellas (Tortella squarrosa = Pleurochaete squarrosa) es una especie de musgo muy frecuente en el suelo, especialmente en las umbrías de los pinares de pino carrasco, en los que consigue pequeños recubrimientos monoespecíficos.",
       selected: false,
       carouselData: [
@@ -38,10 +43,13 @@ export const plantsData = [
       imageSource: require("../../../img/plantasWiki/primula.jpg"),
       imageSourceBackground: require('../../../img/plantasWiki/primulas-background.png'),
 
-
       sunLight: "moderado",
       water: "cada 2-3 días",
       care: "parcial",
+
+      potWater: 4,
+      potWaterTime: "12:00",
+      potSunLight: 3,
 
       description: "Las prímulas (Primula spp.), también conocidas como primaveras o primaveras de jardín (por ser la primera en florecer), es un género de plantas de la familia de las primuláceas.",
       selected: false,
@@ -69,6 +77,10 @@ export const plantsData = [
       sunLight: "moderado",
       water: "cada 1-2 días",
       care: "parcial",
+
+      potWater: 5,
+      potWaterTime: "12:00",
+      potSunLight: 1,
 
       imageSource: require("../../../img/plantasWiki/paleta-pintor.jpg"),
       imageSourceBackground: require('../../../img/plantasWiki/paleta-pintor-background.png'),
@@ -99,6 +111,10 @@ export const plantsData = [
       water: "cada 14 días",
       care: "extenso",
 
+      potWater: 12,
+      potWaterTime: "12:00",
+      potSunLight: 6,
+
       imageSource: require("../../../img/plantasWiki/cactus-conejo.jpg"),
       imageSourceBackground: require('../../../img/plantasWiki/cactus-conejo-background.png'),
       description: "Opuntia microdasys es una especie perteneciente a la familia Cactaceae, nativa de México. En México es conocida como nopal cegador, en referencia a que las glóquidas que se les clavan en los ojos a los animales que pastan pueden causarles ceguera",
@@ -128,6 +144,10 @@ export const plantsData = [
       water: "cada 20 días",
       care: "extenso",
 
+      potWater: 28,
+      potWaterTime: "12:00",
+      potSunLight: 6,
+
       imageSource: require("../../../img/plantasWiki/aloe-vera.jpg"),
       imageSourceBackground: require('../../../img/plantasWiki/aloe-vera-background.png'),
       description: "Aloe vera, también llamada sábila, es una especie suculenta de la familia Asphodelaceae. Con unas quinientas (500) especies, el aloe está ampliamente distribuido y se considera una especie invasora en muchas regiones del mundo.",
@@ -156,6 +176,10 @@ export const plantsData = [
       sunLight: "facil",
       water: "cada 10 días",
       care: "extenso",
+
+      potWater: 9,
+      potWaterTime: "12:00",
+      potSunLight: 5,
 
       imageSource: require("../../../img/plantasWiki/karaconcha.jpg"),
       imageSourceBackground: require('../../../img/plantasWiki/karaconcha-background.png'),

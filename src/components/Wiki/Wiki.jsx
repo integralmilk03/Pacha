@@ -17,6 +17,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import styles, { height } from "../Styles/styles.js";
 import { plantsData } from "./valuesWiki.js";
 import { COLORS } from "../Styles/color.js";
+import { sendDataToDatabase } from "./Plantas.jsx";
 import { getPachaName, setColorBackground, setBackground, setPachaBackground } from "../Measurements/Main.js";
 
 
@@ -27,13 +28,11 @@ const [modalVisible, setModalVisible] = useState(false);
 //Variables para planta personalzida
 const [name, onChangeName] = useState('');
 const [genre, onChangeGenre] = useState('');
-const [selectedDays, setSelectedDays] = useState([]);
 const [sunLight, setSunLight] = useState(1);
 //Variables para riego
 const [water, setWater] = useState(1);
 const [hours, setHours] = useState('');
 const [minutes, setMinutes] = useState('');
-const [error, setError] = useState('');
 
 const validateTime = (hh, mm) => {
   const hoursValid = hh === '' || (hh >= 0 && hh <= 23);
@@ -46,9 +45,9 @@ const handleHoursChange = (text) => {
   if (value.length <= 2) {
     setHours(value);
     if (validateTime(value, minutes)) {
-      setError('');
+      console.log('')
     } else {
-      setError('Hora o minutos inválidos.');
+      console.log('Hora o minutos inválidos.');
     }
   }
 };
@@ -58,9 +57,9 @@ const handleMinutesChange = (text) => {
   if (value.length <= 2) {
     setMinutes(value);
     if (validateTime(hours, value)) {
-      setError('');
+      console.log('');
     } else {
-      setError('Hora o minutos inválidos.');
+      console.log('Hora o minutos inválidos.');
     }
   }
 }
@@ -143,7 +142,7 @@ return (
       value={genre}
       />
 
-      <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center',}}>
+      <View style={{height: '20%', flexDirection: 'row', justifyContent: 'center',}}>
         <View style={{ width: '40%', justifyContent: 'center', alignItems: 'center',}}>
           <Text style={{
           fontFamily: 'open-sans',
@@ -231,8 +230,7 @@ return (
       <TouchableOpacity
       style={styles.customCard.closeButton}
       onPress={() => {
-        console.log(selectedDays.length)
-        if(!(name && sunLight && selectedDays.length)) {
+        if(!(name && sunLight && hours && minutes && water)) {
           Alert.alert('Error','Nombre, días de riego y horas de sol deben tener un valor.')
         }
         else{
@@ -242,12 +240,18 @@ return (
           setColorBackground('#EFCE98');
           setBackground(require('../../../img/plantasWiki/personalizado.png'));
           setPachaBackground(require('../../../img/pachas/pacha_generica.png'));
+          
+          let time = `${hours}:${minutes}`;
+          sendDataToDatabase(water, time, sunLight);
 
-          onChangeGenre('');
           onChangeName('');
-          setSelectedDays([]);
-          setSunLight(0);
-          console.log(`${name}, ${genre}, ${selectedDays}, ${sunLight}`);
+          onChangeGenre('');
+          setWater(1);
+          setHours('');
+          setMinutes('');
+          setSunLight(1);
+
+          console.log(`${name}, ${genre}, ${water}, ${time}, ${sunLight}`);
 
           closeModal();
         }
