@@ -126,15 +126,24 @@ return (
     {/* behavior="position" enabled */}
     
     <View style={styles.customCard.container}>
+
       <Text style={styles.customCard.textTitle}>Nombre:</Text>
       <TextInput
       style={styles.customCard.inputText}
-      placeholder="ej. Pachasaurio"
+      placeholder="ej. Tulio"
       onChangeText={onChangeName}
       value={name}
       />
 
-      <Text style={styles.customCard.textTitle}>Genero (opcional):</Text>
+      <View
+      style={{
+      borderBottomColor: COLORS.apple200,
+      borderBottomWidth: 1,
+      height: 1,
+      width: '80%',
+      }}/>
+
+      <Text style={styles.customCard.textTitle}>Tipo de planta:</Text>
       <TextInput
       style={styles.customCard.inputText}
       placeholder="ej. Cactus Cebra"
@@ -142,17 +151,113 @@ return (
       value={genre}
       />
 
-      <View style={{height: '20%', flexDirection: 'row', justifyContent: 'center',}}>
-        <View style={{ width: '40%', justifyContent: 'center', alignItems: 'center',}}>
+      <View
+      style={{
+      borderBottomColor: COLORS.apple200,
+      borderBottomWidth: 1,
+      height: 1,
+      width: '80%',
+      }}/>
+
+      <View style={styles.customCard.touchableContainer}>
+        <Text style={{
+        fontFamily: 'open-sans',
+        fontSize: height > 850 ? 25 : 18,
+        color: 'white',
+        padding: 5,
+        // width: '40%',
+        }}>Periodo de riego por día</Text>
+        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start',}}>
+          <Pressable style={styles.customCard.touchableSign}
+          onPress={() => water == 1 ? setWater(1) : setWater(water - 1)}
+          >
+            <Icon name="minus" size={20} color={COLORS.apple950Inverse} />
+          </Pressable>
+
+          <TextInput
+          style={styles.customCard.touchableLabelButton}
+          editable={false}
+          placeholder={water.toString()}
+          placeholderTextColor={'white'}
+          keyboardType="numeric"
+          onChangeText={water}
+          value={water}
+          />
+
+          <Pressable style={styles.customCard.touchableSign}
+            onPress={() => setWater(water + 1)}
+          >
+            <Icon name="plus" size={20} color={COLORS.apple950Inverse} />
+          </Pressable>
+        </View>
+      </View>
+
+
+      <View
+      style={{
+      borderBottomColor: COLORS.apple200,
+      borderBottomWidth: 1,
+      height: 1,
+      width: '80%',
+      }}/>
+
+
+      <View style={styles.customCard.touchableContainer}>
+        <Text style={{
+        fontFamily: 'open-sans',
+        fontSize: height > 850 ? 25 : 18,
+        color: 'white',
+        padding: 5,
+        }}>Hora de riego</Text>
+        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start',}}> 
+            <TextInput
+            value={hours}
+            onChangeText={handleHoursChange}
+            placeholder="HH"
+            keyboardType="numeric"
+            maxLength={2}
+            placeholderTextColor={'gray'}
+            style={{textAlign: 'center', padding: 5, fontSize: 18, fontFamily: 'open-sans'}}
+            />
+            <Text style={{fontFamily: 'open-sans', fontSize: 18, color: 'gray', textAlign: 'center'}}>:</Text>
+            <TextInput
+              value={minutes}
+              onChangeText={handleMinutesChange}
+              placeholder="MM"
+              keyboardType="numeric"
+              maxLength={2}
+              placeholderTextColor={'gray'}
+              style={{textAlign: 'center', padding: 5, fontSize: 18, fontFamily: 'open-sans'}}
+              
+            />
+          </View>
+      </View>
+
+      <View
+      style={{
+      borderBottomColor: COLORS.apple200,
+      borderBottomWidth: 1,
+      height: 1,
+      width: '80%',
+      }}/>
+
+      {/* <View style={{height: '20%', flexDirection: 'row', justifyContent: 'center',}}>
+        <View style={{ width: '50%', justifyContent: 'center', alignItems: 'center',}}>
           <Text style={{
           fontFamily: 'open-sans',
-          fontSize: height > 850 ? 25 : 20,
+          fontSize: height > 850 ? 25 : 18,
           color: 'white',
           padding: 20,
-          }}>Riego</Text>
+          }}>Periodo de riego (días)</Text>
+          <Text style={{
+          fontFamily: 'open-sans',
+          fontSize: height > 850 ? 25 : 18,
+          color: 'white',
+          padding: 20,
+          }}>Hora de riego</Text>
         </View>
 
-        <View style={{width: '60%', flexDirection: 'column',}}>
+        <View style={{width: '50%', flexDirection: 'column',}}>
           <View style={{width: '100%', height: '50%', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start',}}>
             <Pressable style={styles.customCard.touchableSign}
             onPress={() => water == 1 ? setWater(1) : setWater(water - 1)}
@@ -198,11 +303,13 @@ return (
             />
           </View>
         </View>
-      </View>
+      </View> */}
 
       <View style={styles.customCard.touchableContainer}>
 
         <Text style={styles.customCard.textTitle}>Horas al sol:</Text>
+
+        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start',}}>
 
         <Pressable style={styles.customCard.touchableSign}
           onPress={() => sunLight == 1 ? setSunLight(1) : setSunLight(sunLight - 1)}
@@ -225,6 +332,7 @@ return (
         >
           <Icon name="plus" size={20} color={COLORS.apple950Inverse} />
         </Pressable>
+        </View>
       </View>
       
       <TouchableOpacity
