@@ -9,7 +9,7 @@ const Login = ({ navigation }) => {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.get('https://django-render-kmzl.onrender.com/users/usuario/');
+            const response = await axios.get('https://django-render-pacha-web.onrender.com/users/usuario/');
             const users = response.data;
             const user = users.find(u => u.usuario === usuario && u.password === password);
 

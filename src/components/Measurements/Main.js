@@ -115,7 +115,7 @@ const Sensor = () => {
                 //console.log('Usuario:', usuario);
                 //console.log('Password:', password);
 
-                const response = await axios.get('https://django-render-kmzl.onrender.com/users/usuario/');
+                const response = await axios.get('https://django-render-pacha-web.onrender.com/users/usuario/');
                 const userData = response.data;
 
                 const user = userData.find(u => u.usuario === usuario && u.password === password);

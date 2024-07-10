@@ -299,15 +299,14 @@ const styles = StyleSheet.create({
     container:{
       flex: 1,
       backgroundColor: COLORS.apple950,
-      alignContent: 'center',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
     },
     textTitle: {
       fontFamily: 'open-sans',
       fontSize: height > 850 ? 25 : 20,
       color: 'white',
-      padding: 20,
+      padding: 10,
     },
     inputText:{
       marginTop: 20,

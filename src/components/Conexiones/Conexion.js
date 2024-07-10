@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Text, View, Switch, TextInput, Pressable, Modal, TouchableOpacity, Alert } from 'react-native';
 import styles, { width, height } from '../Styles/styles';
 import { showMessage } from "react-native-flash-message";
 import { COLORS } from '../Styles/color';
 import { setPachaNickName } from '../Measurements/Main';
+import Slider from '@react-native-community/slider';
+
 
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
@@ -14,19 +16,62 @@ const Politic = 'Rodrigo Sebastian';
 const TermsAndUse = 'Ramirez Uño';
 
 const Conexion = () => {
+
+
   const navigation = useNavigation();
 
 
   const [isManual, setIsManual] = useState(false);
   const [changeUserModal, setChangeUserModal] = useState(false);
+
   const [newUsername, setNewUsername] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [changeNickNameModal, setChangeNickNameModal] = useState(false);
   const [newNickName, setNewNickName] = useState('');
+
+  const [changeNickNameModal, setChangeNickNameModal] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalText, setModalText] = useState('');
-
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
+
+  const [sliderValue, setSliderValue] = useState(100);
+  const [sliderVisible, setSliderVisible] = useState(false);
+
+  const [pressIn, setPressIn] = useState(false);
+  const timeoutRef = useRef(null);
+
+  const handlePressIn = () => {
+    setPressIn(true);
+    showMessage({
+      message: "Modo Manual",
+      description: "Mantener apretado para regar",
+      type: "info",
+      animationDuration: 325,
+    });
+    timeoutRef.current = setTimeout(() => {
+      console.log('variable para el riego cambia')
+      setPressIn(false);
+      showMessage({
+        message: "Regando planta",
+        description: "Soltar para dejar de regar",
+        type: "success",
+        animationDuration: 325,
+      });
+    }, 1500);
+  };
+
+  const handlePressOut = () => {
+    clearTimeout(timeoutRef.current);
+    if (pressIn) {
+      showMessage({
+        message: "Riego cancelado",
+        description: "El riego ha sido cancelado",
+        type: "warning",
+        animationDuration: 325,
+      });
+    }
+    setPressIn(false);
+  };
+
 
   const toggleNewNickName = () => {
     setChangeNickNameModal(!changeNickNameModal)
@@ -45,6 +90,10 @@ const Conexion = () => {
     setConfirmModalVisible(!confirmModalVisible);
   };
 
+  const handlerBrightness = () => {
+    setSliderVisible(!sliderVisible);
+  };
+
   const handleSaveUser = async () => {
 
     try {
@@ -54,14 +103,14 @@ const Conexion = () => {
       console.log(usuario);
       console.log(password);
 
-
-      const res = await axios.get('https://django-render-kmzl.onrender.com/users/usuario/');
+      
+      const res = await axios.get('https://django-render-pacha-web.onrender.com/users/usuario/');
       const userData = res.data;
       const user = userData.find(u => u.usuario === usuario && u.password === password);
       const userId = user.id;
       console.log(userId);
 
-      const response = await axios.patch(`https://django-render-kmzl.onrender.com/users/usuario/${userId}/`, {
+      const response = await axios.patch(`https://django-render-pacha-web.onrender.com/users/usuario/${userId}/`, {
         usuario: newUsername,
         password: newPassword,
       });
@@ -140,6 +189,20 @@ const Conexion = () => {
           trackColor={{ true: 'green', false: 'lightgreen' }}
           thumbColor={'grey'} />
       </View>
+
+      <Pressable
+        onPressIn={handlePressIn}
+        onPressOut={handlePressOut}
+        style={({ pressed }) => ({
+          backgroundColor: pressed ? COLORS.apple500 : COLORS.apple50,
+        })}
+      >
+        {({ pressed }) => (
+          <Text style={[styles.switch.text, { color: COLORS.dun }]}>
+            {pressed ? 'Regando planta' : 'Riego'}
+          </Text>
+        )}
+      </Pressable>
 
 
       <Pressable
@@ -288,6 +351,36 @@ const Conexion = () => {
           </Text>
         </View>
       </Modal>
+
+      <Pressable
+        onPress={handlerBrightness}
+        style={({ pressed }) => [
+          { width: "100%", },
+          pressed ? { backgroundColor: COLORS.apple100 } : { backgroundColor: COLORS.apple50 }
+        ]}
+      >
+        <Text style={[styles.switch.text, { color: COLORS.dun }]}>Brillo</Text>
+      </Pressable>
+
+      {sliderVisible && 
+      <View style={{flexDirection: 'row', alignItems: 'center', padding: 5, }}>
+        <Slider
+        style={{width: '75%', height: 50}}
+        minimumValue={0}
+        maximumValue={100}
+        minimumTrackTintColor={COLORS.apple600}
+        maximumTrackTintColor={COLORS.apple400}
+        value={sliderValue}
+        
+        onValueChange={value => {
+          setSliderValue(Math.round(value));
+        }}
+        />
+        <Text style={{fontFamily: 'open-sans', fontSize: 20,}}>
+          {sliderValue} %
+        </Text>
+      </View>
+      }
 
       <Pressable
         onPress={handleLogout}
