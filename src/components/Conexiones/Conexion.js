@@ -65,7 +65,7 @@ const Conexion = () => {
       console.log(usuario);
       console.log(password);
 
-      
+
       const res = await axios.get('https://django-render-pacha-web.onrender.com/users/usuario/');
       const userData = res.data;
       const user = userData.find(u => u.usuario === usuario && u.password === password);
@@ -119,49 +119,135 @@ const Conexion = () => {
     handleSaveUser();
   };
 
+  const regadobomba = async () => {
+    try {
+      const preusuarioregar = await AsyncStorage.getItem('userToken');
+      const preusuarioDataregar = JSON.parse(preusuarioregar);
+      const { usuario, password } = preusuarioDataregar;
+
+      const resregar = await axios.get('https://django-render-pacha-web.onrender.com/users/usuario/');
+      const userDataregar = resregar.data;
+      const userregar = userDataregar.find(u => u.usuario === usuario && u.password === password);
+      const userIdregar = userregar.id;
+
+      const responseregar = await axios.patch(`https://django-render-pacha-web.onrender.com/users/usuario/${userIdregar}/`, {
+        riego: 1,
+      });
+      if (responseregar.status === 200 || responseregar.status === 204) {
+        console.log('Si')
+        showMessage({
+          message: "Regado",
+          description: `Tu planta acaba de ser regada`,
+          type: "success",
+          animationDuration: 1500,
+        });
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Hubo un problema al actualizar los datos. Inténtalo nuevamente.');
+    }
+  };
+
+  const handleAutomatico = async () => {
+    try {
+      setIsManual((previousState) => !previousState);
+      console.log('Modo automatico');
+      setRiegoVisible(false);
+      showMessage({
+        message: "Modo Automatico",
+        description: "Activado sistema de riego automatico",
+        type: "success",
+        animationDuration: 325,
+      });
+      const preusuario = await AsyncStorage.getItem('userToken');
+      const preusuarioData = JSON.parse(preusuario);
+      const { usuario, password } = preusuarioData;
+
+      const res = await axios.get('https://django-render-pacha-web.onrender.com/users/usuario/');
+      const userData = res.data;
+      const user = userData.find(u => u.usuario === usuario && u.password === password);
+      const userId = user.id;
+
+      const response = await axios.patch(`https://django-render-pacha-web.onrender.com/users/usuario/${userId}/`, {
+        modo: 0,
+      });
+      if (response.status === 200 || response.status === 204) {
+        console.log('modo a 0 (Automático)')
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Hubo un problema al actualizar los datos. Inténtalo nuevamente.');
+    }
+  };
+
+  const handleManual = async () => {
+    try {
+      setIsManual((previousState) => !previousState);
+      console.log("Modo Manual");
+      setRiegoVisible(true);
+      showMessage({
+        message: "Modo manual",
+        description: "Advertencia. El riego ya no sera automatico",
+        type: "warning",
+        animationDuration: 325
+      });
+      const preusuario = await AsyncStorage.getItem('userToken');
+      const preusuarioData = JSON.parse(preusuario);
+      const { usuario, password } = preusuarioData;
+
+      const res = await axios.get('https://django-render-pacha-web.onrender.com/users/usuario/');
+      const userData = res.data;
+      const user = userData.find(u => u.usuario === usuario && u.password === password);
+      const userId = user.id;
+
+      const response = await axios.patch(`https://django-render-pacha-web.onrender.com/users/usuario/${userId}/`, {
+        modo: 1,
+      });
+      if (response.status === 200 || response.status === 204) {
+        console.log('modo a 1 (Manual)')
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Hubo un problema al actualizar los datos. Inténtalo nuevamente.');
+    }
+  };
+
+  const handleSliderChange = async (value) => {
+    try {
+      setSliderValue(Math.round(value)); // Actualiza el estado con el valor redondeado del slider
+      const preusuario = await AsyncStorage.getItem('userToken');
+      const preusuarioData = JSON.parse(preusuario);
+      const { usuario, password } = preusuarioData;
+
+      const res = await axios.get('https://django-render-pacha-web.onrender.com/users/usuario/');
+      const userData = res.data;
+      const user = userData.find(u => u.usuario === usuario && u.password === password);
+      const userId = user.id;
+
+      const response = await axios.patch(`https://django-render-pacha-web.onrender.com/users/usuario/${userId}/`, {
+        brillo: sliderValue,
+      });
+    } catch (error) {
+      Alert.alert('Error', 'Hubo un problema al actualizar los datos. Inténtalo nuevamente.');
+    }
+
+  };
+
   return (
     <View style={styles.switch.container}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <Text style={[styles.switch.text, { color: COLORS.dun }]}>Modo manual</Text>
         <Switch
           value={isManual}
-          onValueChange={
-            isManual ?
-              (() => {
-                setIsManual((previousState) => !previousState)
-                console.log('Modo automatico');
-                setRiegoVisible(false);
-                showMessage({
-                  message: "Modo Automatico",
-                  description: "Activado sistema de riego automatico",
-                  type: "success",
-                  animationDuration: 325,
-                });
-              }) :
-              (() => {
-                setIsManual((previousState) => !previousState)
-                console.log("Modo Manual");
-                setRiegoVisible(true);
-                showMessage({
-                  message: "Modo manual",
-                  description: "Advertencia. El riego ya no sera automatico",
-                  type: "warning",
-                  animationDuration: 325
-                })
-              })
-          }
+          onValueChange={isManual ? handleAutomatico : handleManual}
           trackColor={{ true: 'green', false: 'lightgreen' }}
-          thumbColor={'grey'} />
+          thumbColor={'grey'}
+        />
       </View>
 
 
       {riegoVisible && <Pressable
-      onPress = {() => {
-        console.log('mandar base de datos');
-      }}
-      style={({ pressed }) => ({
-        backgroundColor: pressed ? COLORS.apple500 : COLORS.apple50,
-      })}
+        onPress={regadobomba}
+        style={({ pressed }) => ({
+          backgroundColor: pressed ? COLORS.apple500 : COLORS.apple50,
+        })}
       >
         <Text style={[styles.switch.text, { color: COLORS.dun }]}>
           Regar planta
@@ -233,11 +319,11 @@ const Conexion = () => {
       )}
 
       <Pressable
-      onPress={toggleNewNickName}
-      style={({ pressed }) => [
-        { width: "100%", },
-        pressed ? { backgroundColor: COLORS.apple100 } : { backgroundColor: COLORS.apple50 }
-      ]}
+        onPress={toggleNewNickName}
+        style={({ pressed }) => [
+          { width: "100%", },
+          pressed ? { backgroundColor: COLORS.apple100 } : { backgroundColor: COLORS.apple50 }
+        ]}
       >
         <Text style={[styles.switch.text, { color: COLORS.dun }]}>Cambiar Apodo</Text>
       </Pressable>
@@ -246,34 +332,34 @@ const Conexion = () => {
         <View style={{ alignItems: 'center' }}>
 
           <TextInput
-          style={{
-            marginTop: 10,
-            width: 300,
-            height: 40,
-            paddingHorizontal: 10,
-            borderRadius: 50,
-            backgroundColor: COLORS.apple300,
-            marginBottom: 15,
-          }}
-          placeholder="Nuevo Nombre"
-          value={newNickName}
-          onChangeText={setNewNickName}
+            style={{
+              marginTop: 10,
+              width: 300,
+              height: 40,
+              paddingHorizontal: 10,
+              borderRadius: 50,
+              backgroundColor: COLORS.apple300,
+              marginBottom: 15,
+            }}
+            placeholder="Nuevo Nombre"
+            value={newNickName}
+            onChangeText={setNewNickName}
           />
 
           <TouchableOpacity
-          onPress={handleNickName}
-          style={{
-            backgroundColor: 'white',
-            fontFamily: 'open-sans',
-            borderRadius: 20,
-            padding: 15,
-            elevation: 2,
-            marginBottom: 15,
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: width * 0.6,
-            height: height > 850 ? height * 0.05 : height * 0.07,
-          }}
+            onPress={handleNickName}
+            style={{
+              backgroundColor: 'white',
+              fontFamily: 'open-sans',
+              borderRadius: 20,
+              padding: 15,
+              elevation: 2,
+              marginBottom: 15,
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: width * 0.6,
+              height: height > 850 ? height * 0.05 : height * 0.07,
+            }}
           >
             <Text>Guardar</Text>
           </TouchableOpacity>
@@ -326,24 +412,21 @@ const Conexion = () => {
         <Text style={[styles.switch.text, { color: COLORS.dun }]}>Brillo</Text>
       </Pressable>
 
-      {sliderVisible && 
-      <View style={{flexDirection: 'row', alignItems: 'center', padding: 5, }}>
-        <Slider
-        style={{width: '75%', height: 50}}
-        minimumValue={0}
-        maximumValue={100}
-        minimumTrackTintColor={COLORS.apple600}
-        maximumTrackTintColor={COLORS.apple400}
-        value={sliderValue}
-        
-        onValueChange={value => {
-          setSliderValue(Math.round(value));
-        }}
-        />
-        <Text style={{fontFamily: 'open-sans', fontSize: 20,}}>
-          {sliderValue} %
-        </Text>
-      </View>
+      {sliderVisible &&
+        <View style={{ flexDirection: 'row', alignItems: 'center', padding: 5, }}>
+          <Slider
+            style={{ width: '75%', height: 50 }}
+            minimumValue={0}
+            maximumValue={100}
+            minimumTrackTintColor={COLORS.apple600}
+            maximumTrackTintColor={COLORS.apple400}
+            onValueChange={handleSliderChange}
+            value={sliderValue}
+          />
+          <Text style={{ fontFamily: 'open-sans', fontSize: 20, }}>
+            {sliderValue} %
+          </Text>
+        </View>
       }
 
       <Pressable

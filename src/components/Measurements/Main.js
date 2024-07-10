@@ -138,6 +138,12 @@ const Sensor = () => {
                     console.log('Temperatura:', user.tempExt);
                     console.log('Húmedad Externa:', user.humExt);
                     console.log('Luz General:', user.luz);
+                    console.log('expresion:', user.expresion);
+                    const labelToFind = expresionesPacha[parseInt(user.expresion)]; //firebaseExpression
+                    const expresion = expresiones.find(expresion => expresion.label === labelToFind);
+                    const expresionImageSource = expresion ? expresion.imageSource : null;
+                    setExpresionImage(expresionImageSource);
+
                 } else {
                     console.log('User not found');
                 }
@@ -156,20 +162,20 @@ const Sensor = () => {
         const interval = setInterval(fetchData, 30000);
 
         // Logica para la image facePot
-        const delay = setTimeout(() => {
-            setExpresionImage(expresionImageSource);
-        }, 200);
+        // const delay = setTimeout(() => {
+        //     setExpresionImage(expresionImageSource);
+        // }, 200);
 
         return () => {
             clearInterval(interval);
-            clearTimeout(delay);
+            // clearTimeout(delay);
         };
     }, []);
 
     // Obtener la imagen de fondo
-    const labelToFind = expresionesPacha[1]; //firebaseExpression
-    const expresion = expresiones.find(expresion => expresion.label === labelToFind);
-    const expresionImageSource = expresion ? expresion.imageSource : null;
+    // const labelToFind = expresionesPacha[1]; //firebaseExpression
+    // const expresion = expresiones.find(expresion => expresion.label === labelToFind);
+    // const expresionImageSource = expresion ? expresion.imageSource : null;
 
     // const interpolate = (value, minValue, maxValue) => {
     //     const range = maxValue - minValue;
