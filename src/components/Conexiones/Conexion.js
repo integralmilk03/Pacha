@@ -8,7 +8,7 @@ import Slider from '@react-native-community/slider';
 
 
 import axios from 'axios';
-import { useNavigation } from '@react-navigation/native';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -16,10 +16,7 @@ const Politic = 'Rodrigo Sebastian';
 const TermsAndUse = 'Ramirez Uño';
 
 const Conexion = () => {
-
-
   const navigation = useNavigation();
-
 
   const [isManual, setIsManual] = useState(false);
   const [changeUserModal, setChangeUserModal] = useState(false);
@@ -36,42 +33,7 @@ const Conexion = () => {
   const [sliderValue, setSliderValue] = useState(100);
   const [sliderVisible, setSliderVisible] = useState(false);
 
-  const [pressIn, setPressIn] = useState(false);
-  const timeoutRef = useRef(null);
-
-  const handlePressIn = () => {
-    setPressIn(true);
-    showMessage({
-      message: "Modo Manual",
-      description: "Mantener apretado para regar",
-      type: "info",
-      animationDuration: 325,
-    });
-    timeoutRef.current = setTimeout(() => {
-      console.log('variable para el riego cambia')
-      setPressIn(false);
-      showMessage({
-        message: "Regando planta",
-        description: "Soltar para dejar de regar",
-        type: "success",
-        animationDuration: 325,
-      });
-    }, 1500);
-  };
-
-  const handlePressOut = () => {
-    clearTimeout(timeoutRef.current);
-    if (pressIn) {
-      showMessage({
-        message: "Riego cancelado",
-        description: "El riego ha sido cancelado",
-        type: "warning",
-        animationDuration: 325,
-      });
-    }
-    setPressIn(false);
-  };
-
+  const [riegoVisible, setRiegoVisible] = useState(false);
 
   const toggleNewNickName = () => {
     setChangeNickNameModal(!changeNickNameModal)
@@ -167,7 +129,8 @@ const Conexion = () => {
             isManual ?
               (() => {
                 setIsManual((previousState) => !previousState)
-                console.log('Modo automatico')
+                console.log('Modo automatico');
+                setRiegoVisible(false);
                 showMessage({
                   message: "Modo Automatico",
                   description: "Activado sistema de riego automatico",
@@ -177,7 +140,8 @@ const Conexion = () => {
               }) :
               (() => {
                 setIsManual((previousState) => !previousState)
-                console.log("Modo Manual")
+                console.log("Modo Manual");
+                setRiegoVisible(true);
                 showMessage({
                   message: "Modo manual",
                   description: "Advertencia. El riego ya no sera automatico",
@@ -190,19 +154,19 @@ const Conexion = () => {
           thumbColor={'grey'} />
       </View>
 
-      <Pressable
-        onPressIn={handlePressIn}
-        onPressOut={handlePressOut}
-        style={({ pressed }) => ({
-          backgroundColor: pressed ? COLORS.apple500 : COLORS.apple50,
-        })}
+
+      {riegoVisible && <Pressable
+      onPress = {() => {
+        console.log('mandar base de datos');
+      }}
+      style={({ pressed }) => ({
+        backgroundColor: pressed ? COLORS.apple500 : COLORS.apple50,
+      })}
       >
-        {({ pressed }) => (
-          <Text style={[styles.switch.text, { color: COLORS.dun }]}>
-            {pressed ? 'Regando planta' : 'Riego'}
-          </Text>
-        )}
-      </Pressable>
+        <Text style={[styles.switch.text, { color: COLORS.dun }]}>
+          Regar planta
+        </Text>
+      </Pressable>}
 
 
       <Pressable
@@ -269,11 +233,11 @@ const Conexion = () => {
       )}
 
       <Pressable
-        onPress={toggleNewNickName}
-        style={({ pressed }) => [
-          { width: "100%", },
-          pressed ? { backgroundColor: COLORS.apple100 } : { backgroundColor: COLORS.apple50 }
-        ]}
+      onPress={toggleNewNickName}
+      style={({ pressed }) => [
+        { width: "100%", },
+        pressed ? { backgroundColor: COLORS.apple100 } : { backgroundColor: COLORS.apple50 }
+      ]}
       >
         <Text style={[styles.switch.text, { color: COLORS.dun }]}>Cambiar Apodo</Text>
       </Pressable>
@@ -282,34 +246,34 @@ const Conexion = () => {
         <View style={{ alignItems: 'center' }}>
 
           <TextInput
-            style={{
-              marginTop: 10,
-              width: 300,
-              height: 40,
-              paddingHorizontal: 10,
-              borderRadius: 50,
-              backgroundColor: COLORS.apple300,
-              marginBottom: 15,
-            }}
-            placeholder="Nuevo Nombre"
-            value={newNickName}
-            onChangeText={setNewNickName}
+          style={{
+            marginTop: 10,
+            width: 300,
+            height: 40,
+            paddingHorizontal: 10,
+            borderRadius: 50,
+            backgroundColor: COLORS.apple300,
+            marginBottom: 15,
+          }}
+          placeholder="Nuevo Nombre"
+          value={newNickName}
+          onChangeText={setNewNickName}
           />
 
           <TouchableOpacity
-            onPress={handleNickName}
-            style={{
-              backgroundColor: 'white',
-              fontFamily: 'open-sans',
-              borderRadius: 20,
-              padding: 15,
-              elevation: 2,
-              marginBottom: 15,
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: width * 0.6,
-              height: height > 850 ? height * 0.05 : height * 0.07,
-            }}
+          onPress={handleNickName}
+          style={{
+            backgroundColor: 'white',
+            fontFamily: 'open-sans',
+            borderRadius: 20,
+            padding: 15,
+            elevation: 2,
+            marginBottom: 15,
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: width * 0.6,
+            height: height > 850 ? height * 0.05 : height * 0.07,
+          }}
           >
             <Text>Guardar</Text>
           </TouchableOpacity>
