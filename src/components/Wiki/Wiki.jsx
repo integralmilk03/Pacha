@@ -242,7 +242,7 @@ return (
           setPachaBackground(require('../../../img/pachas/pacha_generica.png'));
           
           let time = `${hours}:${minutes}`;
-          sendDataToDatabase(water, time, sunLight);
+          sendDataToDatabase(sunLight, water, time);
 
           onChangeName('');
           onChangeGenre('');

@@ -51,7 +51,7 @@ const FloatingButton = ( label ) => {
       setBackground(plant.imageSourceBackground);
       setColorBackground(plant.color);
       setPachaBackground(plant.imageBackground);
-      sendDataToDatabase(plant.potWater, plant.potWaterTime, plant.potSunLight);
+      sendDataToDatabase(plant.potSunLight, plant.potWater, plant.potWaterTime);
     
     }
 
