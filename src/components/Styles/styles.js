@@ -218,7 +218,6 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'center',
-      paddingTop: 20, 
     },
     image: {
       width: width,

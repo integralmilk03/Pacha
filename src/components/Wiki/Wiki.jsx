@@ -88,8 +88,7 @@ return (
     key={plant.id}
     label={plant.name}
     imgSource={plant.imageSource}
-    />))
-    }
+    />))}
 
     <Pressable
     onPress={() => {
@@ -279,7 +278,7 @@ return (
           
           getPachaName(genre, name);
           setColorBackground('#EFCE98');
-          setBackground(require('../../../img/plantasWiki/personalizado.png'));
+          setBackground(require('../../../img/plantasWiki/personalizadoFondo.png'));
           setPachaBackground(require('../../../img/pachas/pacha_generica.png'));
           
           let time = `${hours}:${minutes}`;
