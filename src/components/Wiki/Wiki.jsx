@@ -47,7 +47,7 @@ const handleHoursChange = (text) => {
     if (validateTime(value, minutes)) {
       console.log('')
     } else {
-      console.log('Hora o minutos inválidos.');
+      setHours(0);
     }
   }
 };
@@ -59,7 +59,7 @@ const handleMinutesChange = (text) => {
     if (validateTime(hours, value)) {
       console.log('');
     } else {
-      console.log('Hora o minutos inválidos.');
+      setMinutes(0);
     }
   }
 }
@@ -209,26 +209,23 @@ return (
         color: 'white',
         padding: 5,
         }}>Hora de riego</Text>
-        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start',}}> 
+        <View style={{flexDirection: 'row', alignItems: 'center',}}> 
             <TextInput
             value={hours}
             onChangeText={handleHoursChange}
-            placeholder="HH"
             keyboardType="numeric"
             maxLength={2}
             placeholderTextColor={'gray'}
-            style={{textAlign: 'center', padding: 5, fontSize: 18, fontFamily: 'open-sans'}}
+            style={styles.customCard.inputTextTime}
             />
-            <Text style={{fontFamily: 'open-sans', fontSize: 18, color: 'gray', textAlign: 'center'}}>:</Text>
+            <Text style={{alignItems: 'center', paddingHorizontal: 10, fontFamily: 'open-sans', fontSize: 15, color: (hours || minutes) ? 'white' : 'gray', textAlign: 'center'}}>:</Text>
             <TextInput
               value={minutes}
               onChangeText={handleMinutesChange}
-              placeholder="MM"
               keyboardType="numeric"
               maxLength={2}
               placeholderTextColor={'gray'}
-              style={{textAlign: 'center', padding: 5, fontSize: 18, fontFamily: 'open-sans'}}
-              
+              style={styles.customCard.inputTextTime}
             />
           </View>
       </View>
@@ -240,70 +237,6 @@ return (
       height: 1,
       width: '80%',
       }}/>
-
-      {/* <View style={{height: '20%', flexDirection: 'row', justifyContent: 'center',}}>
-        <View style={{ width: '50%', justifyContent: 'center', alignItems: 'center',}}>
-          <Text style={{
-          fontFamily: 'open-sans',
-          fontSize: height > 850 ? 25 : 18,
-          color: 'white',
-          padding: 20,
-          }}>Periodo de riego (días)</Text>
-          <Text style={{
-          fontFamily: 'open-sans',
-          fontSize: height > 850 ? 25 : 18,
-          color: 'white',
-          padding: 20,
-          }}>Hora de riego</Text>
-        </View>
-
-        <View style={{width: '50%', flexDirection: 'column',}}>
-          <View style={{width: '100%', height: '50%', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start',}}>
-            <Pressable style={styles.customCard.touchableSign}
-            onPress={() => water == 1 ? setWater(1) : setWater(water - 1)}
-            >
-              <Icon name="minus" size={20} color={COLORS.apple950Inverse} />
-            </Pressable>
-
-            <TextInput
-            style={styles.customCard.touchableLabelButton}
-            editable={false}
-            placeholder={water.toString()}
-            placeholderTextColor={'white'}
-            keyboardType="numeric"
-            onChangeText={water}
-            value={water}
-            />
-
-            <Pressable style={styles.customCard.touchableSign}
-              onPress={() => setWater(water + 1)}
-            >
-              <Icon name="plus" size={20} color={COLORS.apple950Inverse} />
-            </Pressable>
-          </View>
-          <View style={{flex: 1, width: '100%', height: '50%', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start',}}> 
-            <TextInput
-            value={hours}
-            onChangeText={handleHoursChange}
-            placeholder="HH"
-            keyboardType="numeric"
-            maxLength={2}
-            placeholderTextColor={'gray'}
-            style={{ width: 50, textAlign: 'center', marginHorizontal: 20,}}
-            />
-            <Text style={{fontFamily: 'open-sans', fontSize: 20, color: 'gray'}}>:</Text>
-            <TextInput
-              value={minutes}
-              onChangeText={handleMinutesChange}
-              placeholder="MM"
-              keyboardType="numeric"
-              maxLength={2}
-              placeholderTextColor={'gray'}
-              style={{ width: 50, textAlign: 'center', marginHorizontal: 20,}}
-            />
-          </View>
-        </View>
-      </View> */}
 
       <View style={styles.customCard.touchableContainer}>
 
@@ -344,7 +277,7 @@ return (
         else{
           Alert.alert('Valores registrados');
           
-          getPachaName(name, genre);
+          getPachaName(genre, name);
           setColorBackground('#EFCE98');
           setBackground(require('../../../img/plantasWiki/personalizado.png'));
           setPachaBackground(require('../../../img/pachas/pacha_generica.png'));
@@ -365,7 +298,7 @@ return (
         }
       }}
       >
-        <Text style={styles.mainScreen.closeButtonText}>Subir</Text>
+        <Text style={styles.customCard.closeButtonText}>Subir</Text>
       </TouchableOpacity>
     </View>
   

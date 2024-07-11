@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
     },
     facePot: {
       position: 'absolute',
-      width: width * 0.3,
-      height: height * 0.5,
+      width: width * 0.28,
+      height: height * 0.48,
       resizeMode: 'contain',
       top: height * 0.18,
 
@@ -122,7 +122,6 @@ const styles = StyleSheet.create({
       paddingHorizontal: height * 0.01,
       fontFamily: 'perolet',
       color: 'white',
-      
     },
     //Boton de datos extras
     pressLecturaButton: {
@@ -139,7 +138,6 @@ const styles = StyleSheet.create({
       color: 'white',
       fontFamily: 'perolet',
       fontSize: height > 850 ? 35 : 20,
-      
     },
     //Modal que se abre al apretar saber mas
     containerModal: {
@@ -206,9 +204,8 @@ const styles = StyleSheet.create({
     closeButtonText: {
       color: 'black',
       fontFamily: 'open-sans-Bold',
-      fontSize: height > 850 ? 22 : 14,
+      fontSize: height > 850 ? 22 : 20,
       FontDisplay: 'center',
-
     },
   },
  
@@ -316,6 +313,13 @@ const styles = StyleSheet.create({
       backgroundColor: COLORS.apple300,
       marginBottom: 20,
     },
+    inputTextTime:{
+      paddingHorizontal: 10,
+      backgroundColor: COLORS.apple300,
+      textAlign: 'center',
+      alignItems: 'center',
+      color: 'black',
+    },
     daysContainer: {
       flexDirection: 'row',
       flexWrap: 'wrap',
@@ -367,11 +371,16 @@ const styles = StyleSheet.create({
       backgroundColor: 'white',
       fontFamily: 'open-sans',
       borderRadius: 20,
-      padding: 15,
+      padding: 10,
+      paddingHorizontal: 40,
       justifyContent: 'center',
       alignItems: 'center',
-      width: width * 0.6,
-      height: height > 850 ? height * 0.05 : height * 0.085,
+    },
+    closeButtonText: {
+      color: 'black',
+      fontFamily: 'open-sans-Bold',
+      fontSize: height > 850 ? 22 : 20,
+      FontDisplay: 'center',
     },
   },
 
@@ -510,9 +519,8 @@ const styles = StyleSheet.create({
       width: width * 0.3,
       height: height * 0.5,
       position: 'absolute',
-      top: -90,
-      // top: height > 850 ? height * 0.1: height * 0.12,
-      // left: width > 500 ? width * 0.3 : width * 0.3,
+      top: height * 0.27,
+      left: width * 0.34,
       resizeMode: 'contain',
     },
   },
@@ -522,8 +530,6 @@ const styles = StyleSheet.create({
       flex: 1,
       paddingTop: 10,
       flexDirection: 'column',
-      //justifyContent: 'space-between',
-      flexWrap: 'wrap',
       backgroundColor: COLORS.apple50,
     },
     text: {
@@ -570,9 +576,24 @@ const styles = StyleSheet.create({
     },
     text: {
       fontFamily: 'open-sans',
-      fontSize: height > 850 ? 20 : 15
+      fontSize: height > 850 ? 20 : 10
     },
-  }
+  },
+  //SETTINGS STYLES
+  headerTextSettings: {
+    fontFamily: 'open-sans',
+    fontSize: 20,
+    // padding: 10,
+  },
+  normalTextSettings: {
+    fontFamily: 'open-sans',
+    fontSize: 15,
+    // padding: 10,
+    color: COLORS.dun,
+  },
+  iconStyle: {
+    
+  },
 });
 
 export default styles;

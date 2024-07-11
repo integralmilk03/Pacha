@@ -139,7 +139,7 @@ const Sensor = () => {
                     console.log('Húmedad Externa:', user.humExt);
                     console.log('Luz General:', user.luz);
                     console.log('expresion:', user.expresion);
-                    const labelToFind = expresionesPacha[parseInt(user.expresion)]; //firebaseExpression
+                    const labelToFind = expresionesPacha[1]; //parseInt(user.expresion)
                     const expresion = expresiones.find(expresion => expresion.label === labelToFind);
                     const expresionImageSource = expresion ? expresion.imageSource : null;
                     setExpresionImage(expresionImageSource);
@@ -177,11 +177,12 @@ const Sensor = () => {
     // const expresion = expresiones.find(expresion => expresion.label === labelToFind);
     // const expresionImageSource = expresion ? expresion.imageSource : null;
 
-    // const interpolate = (value, minValue, maxValue) => {
-    //     const range = maxValue - minValue;
-    //     const newValue = Math.round(100 - ((value - minValue) * 100) / range);
-    //     return Math.max(0, Math.min(100, newValue));
-    // };
+    const interpolate = (value, minValue, maxValue) => {
+        const range = maxValue - minValue;
+        const newValue = Math.round(100 - ((value - minValue) * 100) / range);
+        return Math.max(0, Math.min(100, newValue));
+    };
+    //1600-4095
 
     return (
         <ScrollView style={{ flex: 1 }}>
@@ -194,32 +195,33 @@ const Sensor = () => {
                 {/* Credencial de identificación */}
 
                 {pachaBackground && <View style={styles.mainScreen.credentialView}>
-                    <Text style={styles.mainScreen.credentialName}>{pachaName}</Text>
                     <Text style={styles.mainScreen.credentialLabel}>{PachaNickName}</Text>
+                    <Text style={styles.mainScreen.credentialName}>{pachaName}</Text>
                 </View>}
 
             </View>
 
             <ImageBackground source={background ? background : null} style={styles.mainScreen.imageBackground}>
-                {circularProgress(`${nivel} %`, 'Nivel de Agua', COLORS.water, nivel)}
+                {/* {circularProgress(`${nivel} %`, 'Nivel de Agua', COLORS.water, nivel)} */}
+                {circularProgress(`50%`, 'Nivel de Agua', COLORS.water, 50)}
                 {circularProgress(`${humidityInt} %`, 'Humedad', COLORS.humidity, humidityInt)}
                 {circularProgress(`${luzUV} %`, 'Ultra Violeta', COLORS.uvLight, luzUV)}
 
                 <TouchableOpacity
-                    style={styles.mainScreen.pressLecturaButton}
-                    title="Saber Mas"
-                    onPress={() => setModalVisible(true)}
+                style={styles.mainScreen.pressLecturaButton}
+                title="Saber Mas"
+                onPress={() => setModalVisible(true)}
                 >
                     <Text style={styles.mainScreen.pressLecturaButtonText}>Saber Mas</Text>
                 </TouchableOpacity>
 
                 <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
-                        setModalVisible(!modalVisible);
-                    }}
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    setModalVisible(!modalVisible);
+                }}
                 >
                     <View style={styles.mainScreen.containerModal}>
                         <Text style={styles.mainScreen.LecturaTextTitle}>Datos Técnicos De Tu Planta</Text>
@@ -236,12 +238,11 @@ const Sensor = () => {
                                 style={styles.mainScreen.closeButton}
                                 onPress={() => setModalVisible(!modalVisible)}
                             >
-                                <Text style={styles.mainScreen.closeButtonText}>Close</Text>
+                                <Text style={styles.mainScreen.closeButtonText}>Cerrar</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                 </Modal>
-
             </ImageBackground>
         </ScrollView>
     )

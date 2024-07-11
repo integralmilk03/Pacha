@@ -1,16 +1,16 @@
 import React, { useState, useRef } from 'react';
-import { Text, View, Switch, TextInput, Pressable, Modal, TouchableOpacity, Alert } from 'react-native';
+import { Text, View, Switch, TextInput, Pressable, Modal, TouchableOpacity, Alert, ScrollView, KeyboardAvoidingView } from 'react-native';
 import styles, { width, height } from '../Styles/styles';
 import { showMessage } from "react-native-flash-message";
 import { COLORS } from '../Styles/color';
 import { setPachaNickName } from '../Measurements/Main';
 import Slider from '@react-native-community/slider';
-
+// import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import axios from 'axios';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 
 const Politic = 'Rodrigo Sebastian';
 const TermsAndUse = 'Ramirez Uño';
@@ -96,8 +96,7 @@ const Conexion = () => {
   };
 
   const handleNickName = () => {
-    console.log(newNickName);
-    newNickName ? setPachaNickName(newNickName) : Alert.alert('Error', 'No se ha ingresado apodo');
+    newNickName ? setPachaNickName(newNickName) : Alert.alert('Error', 'No se ha ingresado nombre o no se tiene un nombre');
     setNewNickName('');
     toggleNewNickName();
     showMessage({
@@ -185,9 +184,9 @@ const Conexion = () => {
       setRiegoVisible(true);
       showMessage({
         message: "Modo manual",
-        description: "Advertencia. El riego ya no sera automatico",
+        description: "Advertencia. El riego ya no sera automatico. Se puede usar 'regar planta' para activar el riego",
         type: "warning",
-        animationDuration: 325
+        animationDuration: 1500
       });
       const preusuario = await AsyncStorage.getItem('userToken');
       const preusuarioData = JSON.parse(preusuario);
@@ -230,103 +229,195 @@ const Conexion = () => {
 
   };
 
-  return (
-    <View style={styles.switch.container}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Text style={[styles.switch.text, { color: COLORS.dun }]}>Modo manual</Text>
-        <Switch
-          value={isManual}
-          onValueChange={isManual ? handleAutomatico : handleManual}
-          trackColor={{ true: 'green', false: 'lightgreen' }}
-          thumbColor={'grey'}
-        />
+  //COSAS NUEVAS 
+
+  //COMPONENTES EXTAS
+  const SwitchManualAutomatic = () => {
+    return(
+    <Switch
+    value={isManual}
+    onValueChange={isManual ? handleAutomatico : handleManual}
+    trackColor={{ true: 'lightgreen', false: 'skyblue' }}
+    thumbColor={'grey'}
+    style={{justifyContent: 'flex-end'}}
+    />
+  )};
+
+  const iconColor = COLORS.dun;
+  const paddingSmall = 10;
+  const paddingMedium = 40;
+
+  const Element = ({title, iconLabel, sizeIcon, component}) => {
+    return(
+    <View style={{ flexDirection: 'row', height: height * 0.1,}}>
+      <View style={{width: '20%', justifyContent: 'center', alignItems: 'flex-end', paddingRight: paddingSmall}}>
+        <Icon name={iconLabel} size={sizeIcon} color={iconColor}/>
       </View>
+      <View style={{width: '60%', justifyContent: 'center', alignItems: 'flex-start', paddingLeft: paddingSmall}}>
+        <Text style={styles.normalTextSettings}>{title}</Text>
+      </View>
+      <View style={{width: '20%', justifyContent: 'center', alignItems: 'flex-end',}}>
+        {component}
+      </View>
+    </View>
+  )};
+
+  const ElementPressable = ({title, iconLabel, sizeIcon, component, onPress}) => {
+    return(
+    <Pressable
+      onPress={onPress}
+      style={[({ pressed }) => (
+      {backgroundColor: pressed ? COLORS.apple500 : COLORS.apple50,}),
+      {flexDirection: 'row', height: height * 0.1}]}
+    >
+      <View style={{width: '20%', justifyContent: 'center', alignItems: 'flex-end', paddingRight: paddingSmall}}>
+        <Icon name={iconLabel} size={sizeIcon} color={iconColor}/>
+      </View>
+      <View style={{width: '60%', justifyContent: 'center', alignItems: 'flex-start', paddingLeft: paddingSmall}}>
+        <Text style={styles.normalTextSettings}>{title}</Text>
+      </View>
+      <View style={{width: '20%', justifyContent: 'center', alignItems: 'flex-end',}}>
+        {component}
+      </View>
+    </Pressable>
+  )};
 
 
-      {riegoVisible && <Pressable
+  const divider = () => {
+  return(
+    <View
+    style={{
+    borderBottomColor: COLORS.apple700,
+    borderBottomWidth: 2,
+    height: 2,
+    width: '100%',
+    }}/>
+  )};
+
+  return (
+    
+    <ScrollView>
+    <View style={{}}>
+
+
+      {/* CONFIGURACIONES DE TU PACHA */}
+      <Text style={styles.headerTextSettings}>Configuraciones de tu pacha</Text>
+      {divider()}
+
+      <Element
+      title={riegoVisible ? "Modo Manual" : "Modo Automatico"}
+      iconLabel= {riegoVisible ? "hand-paper" : "robot"} 
+      sizeIcon={35}
+      component={<SwitchManualAutomatic />}
+      />
+
+        {riegoVisible &&
+        <ElementPressable
+        title="Regar planta"
+        iconLabel= {null}
+        sizeIcon={0}
+        component={null}
         onPress={regadobomba}
-        style={({ pressed }) => ({
-          backgroundColor: pressed ? COLORS.apple500 : COLORS.apple50,
-        })}
-      >
-        <Text style={[styles.switch.text, { color: COLORS.dun }]}>
-          Regar planta
-        </Text>
-      </Pressable>}
+        />}
 
 
-      <Pressable
-        onPress={toggleChangeUserModal}
-        style={({ pressed }) => [
-          { width: "100%", },
-          pressed ? { backgroundColor: COLORS.apple100 } : { backgroundColor: COLORS.apple50 }
-        ]}
-      >
-        <Text style={[styles.switch.text, { color: COLORS.dun }]}>Cambiar Usuario o Contraseña</Text>
-      </Pressable>
+      <ElementPressable
+      title="Brillo"
+      iconLabel="lightbulb"
+      sizeIcon={35}
+      component={null}
+      onPress={handlerBrightness}
+      />
 
-      {changeUserModal && (
-        <View style={{ alignItems: 'center' }}>
-          <TextInput
-            style={{
-              marginTop: 10,
-              width: 300,
-              height: 40,
-              paddingHorizontal: 10,
-              borderRadius: 50,
-              backgroundColor: COLORS.apple300,
-              marginBottom: 15,
-            }}
-            placeholder="Nuevo Usuario"
-            value={newUsername}
-            onChangeText={setNewUsername}
+        {sliderVisible &&
+        <View style={{ flexDirection: 'row', alignItems: 'center', padding: 5, }}>
+          <Slider
+            style={{ width: '75%', height: 50 }}
+            minimumValue={0}
+            maximumValue={100}
+            minimumTrackTintColor={COLORS.apple600}
+            maximumTrackTintColor={COLORS.apple400}
+            onValueChange={handleSliderChange}
+            value={sliderValue}
           />
+          <Text style={{ fontFamily: 'open-sans', fontSize: 20, }}>
+            {sliderValue} %
+          </Text>
+        </View>}
 
-          <TextInput
-            style={{
-              marginTop: 10,
-              width: 300,
-              height: 40,
-              paddingHorizontal: 10,
-              borderRadius: 50,
-              backgroundColor: COLORS.apple300,
-              marginBottom: 15,
-            }}
-            placeholder="Nuevo Contraseña"
-            value={newPassword}
-            onChangeText={setNewPassword}
-            secureTextEntry={true}
-          />
+      {/* OPCIONES DE PERFIL Y USUARIO */}
 
-          <TouchableOpacity
-            onPress={toggleConfirmModal}
-            style={{
-              backgroundColor: 'white',
-              fontFamily: 'open-sans',
-              borderRadius: 20,
-              padding: 15,
-              elevation: 2,
-              marginBottom: 15,
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: width * 0.6,
-              height: height > 850 ? height * 0.05 : height * 0.07,
-            }}
-          >
-            <Text>Guardar</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+      <Text style={styles.headerTextSettings}>Opciones de perfil y usuario</Text>
+      {divider()}
 
-      <Pressable
-        onPress={toggleNewNickName}
-        style={({ pressed }) => [
-          { width: "100%", },
-          pressed ? { backgroundColor: COLORS.apple100 } : { backgroundColor: COLORS.apple50 }
-        ]}
-      >
-        <Text style={[styles.switch.text, { color: COLORS.dun }]}>Cambiar Apodo</Text>
-      </Pressable>
+      <ElementPressable
+      title="Cambiar usuario y/o contraseña"
+      iconLabel="user-circle"
+      sizeIcon={35}
+      component={null}
+      onPress={toggleChangeUserModal}
+      />
+
+        {changeUserModal && (
+          <View style={{ alignItems: 'center'}}>
+            <TextInput
+              style={{
+                marginTop: 10,
+                width: 300,
+                height: 40,
+                paddingHorizontal: 10,
+                borderRadius: 50,
+                backgroundColor: COLORS.apple300,
+                marginBottom: 15,
+              }}
+              placeholder="Nuevo Usuario"
+              value={newUsername}
+              onChangeText={setNewUsername}
+            />
+
+            <TextInput
+              style={{
+                marginTop: 10,
+                width: 300,
+                height: 40,
+                paddingHorizontal: 10,
+                borderRadius: 50,
+                backgroundColor: COLORS.apple300,
+                marginBottom: 15,
+              }}
+              placeholder="Nuevo Contraseña"
+              value={newPassword}
+              onChangeText={setNewPassword}
+              secureTextEntry={true}
+            />
+
+            <TouchableOpacity
+              onPress={toggleConfirmModal}
+              style={{
+                backgroundColor: 'white',
+                fontFamily: 'open-sans',
+                borderRadius: 20,
+                padding: 15,
+                elevation: 2,
+                marginBottom: 15,
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: width * 0.6,
+                height: height > 850 ? height * 0.05 : height * 0.07,
+              }}
+            >
+              <Text>Guardar</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
+      <ElementPressable
+      title="Cambiar nombre de tu Pacha"
+      iconLabel="seedling"
+      sizeIcon={35}
+      component={null}
+      onPress={toggleNewNickName}
+      />
 
       {changeNickNameModal && (
         <View style={{ alignItems: 'center' }}>
@@ -366,26 +457,39 @@ const Conexion = () => {
         </View>
       )}
 
+      <ElementPressable 
+      title="Cerrar Sesion"
+      iconLabel="user-slash"
+      sizeIcon={30}
+      component={null}
+      onPress={handleLogout}
+      />
 
-      <Pressable
-        onPress={() => toggleModal(TermsAndUse)}
-        style={({ pressed }) => [
-          { width: "100%", },
-          pressed ? { backgroundColor: COLORS.apple100 } : { backgroundColor: COLORS.apple50 }
-        ]}
-      >
-        <Text style={[styles.switch.text, { color: COLORS.dun }]}>Terminos de uso</Text>
-      </Pressable>
 
-      <Pressable
-        onPress={() => toggleModal(Politic)}
-        style={({ pressed }) => [
-          { width: "100%", },
-          pressed ? { backgroundColor: COLORS.apple100 } : { backgroundColor: COLORS.apple50 }
-        ]}
-      >
-        <Text style={[styles.switch.text, { color: COLORS.dun }]}>Politica de privacidad</Text>
-      </Pressable>
+
+      {/* LEGAL */}
+
+      <Text style={styles.headerTextSettings}>Legal</Text>
+      {divider()}
+
+      <ElementPressable 
+      title="Terminos de uso"
+      iconLabel="file-contract"
+      sizeIcon={30}
+      component={null}
+      onPress={() => toggleModal(TermsAndUse)}
+      />
+
+      <ElementPressable 
+      title="Politica de privacidad"
+      iconLabel="file-alt"
+      sizeIcon={30}
+      component={null}
+      onPress={() => toggleModal(Politic)}
+      />
+
+
+      {/* PAGINAS MODALES */}
 
       <Modal
         animationType="slide"
@@ -401,43 +505,6 @@ const Conexion = () => {
           </Text>
         </View>
       </Modal>
-
-      <Pressable
-        onPress={handlerBrightness}
-        style={({ pressed }) => [
-          { width: "100%", },
-          pressed ? { backgroundColor: COLORS.apple100 } : { backgroundColor: COLORS.apple50 }
-        ]}
-      >
-        <Text style={[styles.switch.text, { color: COLORS.dun }]}>Brillo</Text>
-      </Pressable>
-
-      {sliderVisible &&
-        <View style={{ flexDirection: 'row', alignItems: 'center', padding: 5, }}>
-          <Slider
-            style={{ width: '75%', height: 50 }}
-            minimumValue={0}
-            maximumValue={100}
-            minimumTrackTintColor={COLORS.apple600}
-            maximumTrackTintColor={COLORS.apple400}
-            onValueChange={handleSliderChange}
-            value={sliderValue}
-          />
-          <Text style={{ fontFamily: 'open-sans', fontSize: 20, }}>
-            {sliderValue} %
-          </Text>
-        </View>
-      }
-
-      <Pressable
-        onPress={handleLogout}
-        style={({ pressed }) => [
-          { width: "100%", },
-          pressed ? { backgroundColor: COLORS.apple100 } : { backgroundColor: COLORS.apple50 }
-        ]}
-      >
-        <Text style={[styles.switch.text, { color: COLORS.dun }]}>Cerrar Sesión</Text>
-      </Pressable>
 
       <Modal
         animationType="slide"
@@ -546,7 +613,10 @@ const Conexion = () => {
         </View>
       </Modal>
 
+
     </View>
+    </ScrollView>
+    
   )
 }
 

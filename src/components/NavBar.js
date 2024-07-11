@@ -16,7 +16,7 @@ import styles, {height} from "./Styles/styles.js";
 //     },
 // };
 
-const iconHeight = height > 850 ? 55 : 35;
+const iconHeight = height > 850 ? 55 : 25;
 
 
 
@@ -32,7 +32,7 @@ const Tabs = () => {
             tabBarShowLabel: false,
             tabBarStyle:{
                 backgroundColor: 'white',
-                height: height > 850 ? 110 : 70,
+                height: height > 850 ? 110 : 60,
             },
         }}
         >

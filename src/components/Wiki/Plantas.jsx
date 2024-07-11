@@ -126,7 +126,7 @@ const FloatingButton = (label) => {
           animationOutTiming={1000}
         >
           <View style={{ flex: 1, backgroundColor: COLORS.apple950, alignContent: 'center', alignItems: 'center' }}>
-            <Text style={{ fontFamily: 'open-sans', fontSize: 20, color: 'white', padding: 15, textAlign: 'center' }}>Deseas agregar un apodo de cariño a tu planta</Text>
+            <Text style={{ fontFamily: 'open-sans', fontSize: 20, color: 'white', padding: 15, textAlign: 'center' }}>Deseas agregar un nombre de cariño a tu planta</Text>
             <TextInput
               style={{
                 marginTop: 20,
