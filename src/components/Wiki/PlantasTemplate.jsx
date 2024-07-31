@@ -19,6 +19,8 @@ const PlantCard = ({ id }) => {
       plantDescription = plant.description;
     }
   })
+
+  const iconHeight = 30;
   
   return (
     <View style={styles.plantCard.mainView}>
@@ -34,19 +36,19 @@ const PlantCard = ({ id }) => {
         <View style={styles.plantCard.credentialContainer}>
 
           <View style={styles.plantCard.credentialView}>
-            <Icon name="plant-wilt" size={height > 850 ? 40 : 30} color="#332D21" style={styles.plantCard.icon}/>
+            <Icon name="plant-wilt" size={height > 850 ? 40 : iconHeight} color="#332D21" style={styles.plantCard.icon}/>
             <Text style={styles.plantCard.credentialName}>Cuidado</Text>
             <Text style={styles.plantCard.credentialLabel}>{plantsData[id-1].care}</Text>
           </View>
 
           <View style={styles.plantCard.credentialView}>
-            <Icon name="faucet-drip" size={height > 850 ? 40 : 30} color="#332D21" style={styles.plantCard.icon}/>
+            <Icon name="faucet-drip" size={height > 850 ? 40 : iconHeight} color="#332D21" style={styles.plantCard.icon}/>
             <Text style={styles.plantCard.credentialName}>Riego</Text>
             <Text style={styles.plantCard.credentialLabel}>{plantsData[id-1].water}</Text>
           </View>
 
           <View style={styles.plantCard.credentialView}>
-            <Icon name="sun" size={height > 850 ? 40 : 30} color="#332D21" style={styles.plantCard.icon}/>
+            <Icon name="sun" size={height > 850 ? 40 : iconHeight} color="#332D21" style={styles.plantCard.icon}/>
             <Text style={styles.plantCard.credentialName}>Sol</Text>
             <Text style={styles.plantCard.credentialLabel}>{plantsData[id-1].sunLight}</Text>
           </View>

@@ -1,8 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
 import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native'
 import Tabs from './src/components/NavBar.js';
 import FlashMessage from 'react-native-flash-message';
@@ -10,6 +9,7 @@ import FlashMessage from 'react-native-flash-message';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Login from './src/components/Login.jsx';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { COLORS } from './src/components/Styles/color.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -50,8 +50,11 @@ export default function App() {
     return null;
   }
 
+  const colorStatusBar = initialRoute == 'Login' ? COLORS.apple300 : COLORS.apple1000;
+
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+      <StatusBar backgroundColor={colorStatusBar} barStyle="light-content" />
       {/* theme={MyTheme} */}
       <NavigationContainer>
         <Stack.Navigator initialRouteName={initialRoute}>

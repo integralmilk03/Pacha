@@ -26,10 +26,14 @@ const defaultPacha = require('../../../img/pachas/pacha_empty.png');
 
 // Constantes para el firebase
 const expresionesPacha = {
-    '1': 'Alegre',
+    '1': 'Calor',
     '2': 'Triste',
-    '3': 'Sedienta',
-    '4': 'Calor',
+    '3': 'Alegre',
+    '4': 'Frio',
+    '5': 'Ahogado',
+    '6': 'Sedienta',
+    '7': 'Vampiro',
+    '8': 'Aburrido',
 };
 
 export const setBackground = (newBackground) => {
@@ -139,7 +143,7 @@ const Sensor = () => {
                     console.log('Húmedad Externa:', user.humExt);
                     console.log('Luz General:', user.luz);
                     console.log('expresion:', user.expresion);
-                    const labelToFind = expresionesPacha[1]; //parseInt(user.expresion)
+                    const labelToFind = expresionesPacha[parseInt(user.expresion)]; //parseInt(user.expresion)
                     const expresion = expresiones.find(expresion => expresion.label === labelToFind);
                     const expresionImageSource = expresion ? expresion.imageSource : null;
                     setExpresionImage(expresionImageSource);
@@ -203,7 +207,6 @@ const Sensor = () => {
 
             <ImageBackground source={background ? background : null} style={styles.mainScreen.imageBackground}>
                 {/* {circularProgress(`${nivel} %`, 'Nivel de Agua', COLORS.water, nivel)} */}
-                {circularProgress(`50%`, 'Nivel de Agua', COLORS.water, 50)}
                 {circularProgress(`${humidityInt} %`, 'Humedad', COLORS.humidity, humidityInt)}
                 {circularProgress(`${luzUV} %`, 'Ultra Violeta', COLORS.uvLight, luzUV)}
 
@@ -227,12 +230,12 @@ const Sensor = () => {
                         <Text style={styles.mainScreen.LecturaTextTitle}>Datos Técnicos De Tu Planta</Text>
                         <View style={styles.mainScreen.dataSensor}>
                             <ScrollView>
-                                {dataModal(temperatureExt, 'ºC', 'Temperatura ambiental', 'Esta medida es la temperatura de donde se encuentra tu Pacha.')}
-                                {dataModal(humidityExt, '%', 'Humedad Relativa', 'Esta medida es la humedad externa de donde se encuentra tu Pacha.')}
-                                {dataModal(humidityInt, '%', 'Humedad de la maceta', 'Esta medida es la humedad que tiene la tierra de tu Pacha. Los rangos son los siguientes: .')}
-                                {dataModal(luz, '%', 'Luz General', 'El sensor detecta la luz del ambiente, artificial o natural. Los rangos son los siguientes: ')}
+                                {dataModal(temperatureExt, 'ºC', 'Temperatura ambiental', 'Esta medida es la temperatura ambiental en donde se encuentra tu Pacha.')}
+                                {dataModal(humidityExt, '%', 'Humedad Relativa', 'Esta medida es la humedad ambiental externa en donde se encuentra tu Pacha.')}
+                                {dataModal(humidityInt, '%', 'Humedad de la maceta', 'Esta medida es la humedad que tiene la tierra de tu Pacha. Los rangos son los siguientes son de 0-100%. Mientras más baja sea la lectura tu planta esta mas seca')}
+                                {dataModal(luz, '%', 'Luz General', 'El sensor detectara la luz del ambiente, artificial o natural. El rango 0-100% a menor porcentaje menos luz recibe tu pacha.')}
                                 {dataModal(luzUV, '%', 'Luz UV', 'El sensor detecta lo rayos UV del sol en uW/cm2. Pacha toma este valor y lo transforma en los siguientes rangos:\n0-20% Bajo \n30-50% Medio \n60-70% Alto\n80-100% Muy Alto')}
-                                {dataModal(nivel, '%', 'Nivel de agua', 'Esta medida representa el porcentaje de agua en el tanque.')}
+                                {/* {dataModal(nivel, '%', 'Nivel de agua', 'Esta medida representa el porcentaje de agua en el tanque. A menor porcentaje significa que tu tanque se esta quedando vacio.')} */}
                             </ScrollView>
                             <TouchableOpacity
                                 style={styles.mainScreen.closeButton}

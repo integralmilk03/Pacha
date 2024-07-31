@@ -31,5 +31,6 @@ export const COLORS = {
     apple800: "#2e5427",
     apple900: "#274522",
     apple950: "#10250e",
+    apple1000: "#050b04",
     apple950Inverse: "white"
 }

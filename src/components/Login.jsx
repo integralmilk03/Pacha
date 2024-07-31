@@ -27,7 +27,7 @@ const Login = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Image source={require('../../assets/adaptive-icon.png')} style={styles.logo} />
+            <Image source={require('../../assets/icon.png')} style={styles.logo} />
             <Text style={styles.welcomeText}>Empecemos esta aventura</Text>
             <Text style={styles.loginText}>Inicia Sesión</Text>
             <TextInput
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#d4edda',
+        backgroundColor: '#a8d89d',
         padding: 20,
     },
     logo: {

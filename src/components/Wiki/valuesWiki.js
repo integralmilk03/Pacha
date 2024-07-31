@@ -56,7 +56,7 @@ export const plantsData = [
       carouselData: [
         {
             id: "01",
-            image: {uri: "https://media.istockphoto.com/id/479233691/es/foto/primulas.jpg?s=1024x1024&w=is&k=20&c=dqj3pRebsI6uBLlNfi7flNykRuOemvCROCg_Em0R5HE="},
+            image: {uri: "https://cdn.pixabay.com/photo/2012/06/08/19/22/primula-schlusselblume-49782_960_720.jpg"},
         },
         {
             id: "02",
@@ -89,15 +89,15 @@ export const plantsData = [
       carouselData: [
         {
             id: "01",
-            image: {uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw04nST2mslUcjgPgrkcTmMIjpxlWvaUXMmQ&s"},
+            image: {uri: "https://images.unsplash.com/photo-1638138294408-ec05d96d504c?q=80&w=1545&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
         },
         {
             id: "02",
-            image: {uri: "https://i0.wp.com/planteateloplantas.com/wp-content/uploads/2024/01/Hypoestes-paleta-de-pintor-wwww.planteateloplantas.com-7.png?resize=675%2C675&ssl=1"},
+            image: {uri: "https://images.unsplash.com/photo-1638138293532-9bceea6e5015?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
         },
         {
             id: "03",
-            image: {uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn3j1fkEElaCMxKyWZN6F8PKkAIccM-PxBaw&s"},
+            image: {uri: "https://images.unsplash.com/photo-1677612680321-7c63f32127ae?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
         },]
     },
     {

@@ -1,5 +1,15 @@
 import React, { useState, useRef } from 'react';
-import { Text, View, Switch, TextInput, Pressable, Modal, TouchableOpacity, Alert, ScrollView, KeyboardAvoidingView } from 'react-native';
+import {
+  Text,
+  View,
+  Switch,
+  TextInput,
+  Pressable,
+  Modal,
+  TouchableOpacity,
+  Alert,
+  ScrollView,
+} from 'react-native';
 import styles, { width, height } from '../Styles/styles';
 import { showMessage } from "react-native-flash-message";
 import { COLORS } from '../Styles/color';
@@ -12,8 +22,58 @@ import axios from 'axios';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Politic = 'Rodrigo Sebastian';
-const TermsAndUse = 'Ramirez Uño';
+const privacyPolicyText = `
+1. Información que Recopilamos
+Información Personal: Recopilamos información que los usuarios proporcionan voluntariamente, como direcciones de correo electrónico, nombres de usuario y contraseñas.
+Información Automáticamente Recopilada: Recopilamos datos como direcciones IP, características del navegador y del dispositivo, y datos de uso cuando los usuarios interactúan con nuestros servicios.
+
+2. Cómo Procesamos su Información
+Utilizamos la información para proveer, mejorar y administrar nuestros servicios, comunicarnos con los usuarios, garantizar la seguridad y prevenir fraudes, y cumplir con las leyes aplicables.
+
+3. Cuándo y con Quién Compartimos su Información Personal
+Podemos compartir información en situaciones específicas, como transferencias comerciales o durante negociaciones de fusiones, ventas de activos de la empresa, financiaciones o adquisiciones.
+
+4. Cómo Manejamos sus Inicios de Sesión en Redes Sociales
+Ofrecemos la opción de registrarse o iniciar sesión usando cuentas de redes sociales. Recibimos cierta información del perfil del proveedor de redes sociales, como nombre, dirección de correo electrónico y foto de perfil.
+
+5. Cuánto Tiempo Conservamos su Información
+Conservamos la información personal durante el tiempo necesario para cumplir con los propósitos descritos en la política de privacidad, a menos que la ley requiera un período de retención más largo.
+
+6. Sus Derechos de Privacidad
+Los usuarios pueden revisar, cambiar o terminar su cuenta en cualquier momento. Tienen el derecho de retirar su consentimiento para el procesamiento de sus datos personales y de solicitar acceso, corrección o eliminación de su información personal.
+
+7. Controles para Características de No Rastrear
+No respondemos a señales de "No rastrear" en navegadores web o dispositivos móviles, ya que no hay un estándar uniforme para reconocer y aplicar estas señales.
+
+8. Actualizaciones de esta Política
+Podemos actualizar la política de privacidad para cumplir con las leyes aplicables. Notificaremos a los usuarios sobre cambios materiales mediante la publicación de un aviso prominente o enviando una notificación directa.
+
+9. Cómo Contactarnos sobre esta Política
+Los usuarios pueden contactar a PACHA a través del correo electrónico pachasmartpot@gmail.com o por correo postal a la dirección proporcionada en la política.
+`;
+const termsOfUse = `
+ACUERDO LEGAL: Al usar los servicios de PACHA, aceptas estar legalmente vinculado por estos términos. Si no estás de acuerdo, no debes usar los servicios.
+
+MODIFICACIONES: PACHA se reserva el derecho de modificar estos términos en cualquier momento. Es tu responsabilidad revisar periódicamente las actualizaciones.
+
+PROPIEDAD INTELECTUAL: PACHA posee o tiene licencia de todos los derechos de propiedad intelectual de los servicios, incluyendo el contenido y las marcas. Se te otorga una licencia limitada para usar los servicios de manera personal y no comercial.
+
+REPRESENTACIONES DEL USUARIO: Al usar los servicios, garantizas que tienes la capacidad legal para cumplir estos términos, no eres menor de edad, y no usarás los servicios para fines ilegales.
+
+ACTIVIDADES PROHIBIDAS: No puedes usar los servicios para actividades prohibidas como: obtener datos sistemáticamente, engañar a otros usuarios, interferir con las características de seguridad, acosar a otros, usar scripts automatizados, entre otras.
+
+CONTRIBUCIONES GENERADAS POR EL USUARIO: Aunque los servicios no permiten publicar contenido, cualquier contribución enviada por los usuarios será propiedad de PACHA y podrá ser usada sin compensación.
+
+GESTIÓN DE SERVICIOS: PACHA puede monitorear y tomar acciones legales contra violaciones de estos términos, restringir el acceso a contenido excesivo o gestionarlo para proteger sus derechos.
+
+DURACIÓN Y TERMINACIÓN: Estos términos son válidos mientras uses los servicios. PACHA puede denegar el acceso y eliminar cuentas por cualquier motivo, sin previo aviso.
+
+MODIFICACIONES E INTERRUPCIONES: PACHA puede cambiar, suspender o interrumpir los servicios en cualquier momento sin responsabilidad.
+
+LEY APLICABLE Y RESOLUCIÓN DE DISPUTAS: Estos términos se rigen por la ley de Bolivia. Las disputas se resolverán mediante arbitraje en La Paz, Bolivia, en español.
+
+EXCEPCIONES A LA RESOLUCIÓN DE DISPUTAS: Ciertas disputas relacionadas con derechos de propiedad intelectual, piratería, invasión de privacidad o uso no autorizado no están sujetas a arbitraje y se resolverán en un tribunal competente.
+`;
 
 const Conexion = () => {
   const navigation = useNavigation();
@@ -249,7 +309,7 @@ const Conexion = () => {
 
   const Element = ({title, iconLabel, sizeIcon, component}) => {
     return(
-    <View style={{ flexDirection: 'row', height: height * 0.1,}}>
+    <View style={{ flexDirection: 'row', height: height * 0.15,}}>
       <View style={{width: '20%', justifyContent: 'center', alignItems: 'flex-end', paddingRight: paddingSmall}}>
         <Icon name={iconLabel} size={sizeIcon} color={iconColor}/>
       </View>
@@ -268,7 +328,7 @@ const Conexion = () => {
       onPress={onPress}
       style={[({ pressed }) => (
       {backgroundColor: pressed ? COLORS.apple500 : COLORS.apple50,}),
-      {flexDirection: 'row', height: height * 0.1}]}
+      {flexDirection: 'row', height: height * 0.15}]}
     >
       <View style={{width: '20%', justifyContent: 'center', alignItems: 'flex-end', paddingRight: paddingSmall}}>
         <Icon name={iconLabel} size={sizeIcon} color={iconColor}/>
@@ -296,8 +356,8 @@ const Conexion = () => {
 
   return (
     
-    <ScrollView>
-    <View style={{}}>
+    <ScrollView >
+    <View style={{backgroundColor: COLORS.apple50}}>
 
 
       {/* CONFIGURACIONES DE TU PACHA */}
@@ -477,7 +537,7 @@ const Conexion = () => {
       iconLabel="file-contract"
       sizeIcon={30}
       component={null}
-      onPress={() => toggleModal(TermsAndUse)}
+      onPress={() => toggleModal(termsOfUse)}
       />
 
       <ElementPressable 
@@ -485,35 +545,20 @@ const Conexion = () => {
       iconLabel="file-alt"
       sizeIcon={30}
       component={null}
-      onPress={() => toggleModal(Politic)}
+      onPress={() => toggleModal(privacyPolicyText)}
       />
 
 
       {/* PAGINAS MODALES */}
 
       <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={{ flex: 1, backgroundColor: 'lightgray' }}>
-          <Text style={{ fontFamily: 'open-sans', fontSize: 25, textAlign: 'justify' }}>
-            {modalText}
-          </Text>
-        </View>
-      </Modal>
-
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
+      animationType="slide"
+      transparent={true}
+      visible={modalVisible}
+      onRequestClose={() => {
+        setModalVisible(!modalVisible);
+      }}>
+        <ScrollView>
         <View style={{
           flex: 1,
           justifyContent: 'center',
@@ -550,16 +595,16 @@ const Conexion = () => {
             </TouchableOpacity>
           </View>
         </View>
+        </ScrollView>
       </Modal>
 
       <Modal
-        animationType="slide" // Nueva sección de código para el modal de confirmación
-        transparent={true}
-        visible={confirmModalVisible}
-        onRequestClose={() => {
-          setConfirmModalVisible(!confirmModalVisible);
-        }}
-      >
+      animationType="slide" // Nueva sección de código para el modal de confirmación
+      transparent={true}
+      visible={confirmModalVisible}
+      onRequestClose={() => {
+        setConfirmModalVisible(!confirmModalVisible);
+      }}>
         <View style={{
           flex: 1,
           justifyContent: 'center',
